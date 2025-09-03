@@ -54,28 +54,40 @@
       resize: vertical;
       margin-top: 10px;
     }
-    .options { 
+
+    /* Checkbox styling */
+    .options, .category-options, .language-options { 
       display: flex; 
       flex-wrap: wrap; 
       gap: 10px 20px; 
       margin-top: 10px; 
-      justify-content:center; 
+      justify-content: center; 
     }
-    .options label { 
+
+    .options label, .category-options label, .language-options label { 
       display: flex; 
       align-items: center; 
-      flex: 1 1 200px; 
-      max-width: 380px;
-      min-width: 150px;
-      word-break: break-word;
+      flex: 1 1 100%;       /* standaard: volledige breedte op klein scherm */
+      max-width: 100%; 
+      word-break: break-word; 
+      white-space: normal; 
     }
+
+    @media(min-width:601px) and (max-width:900px) { 
+      .options label, .category-options label, .language-options label { 
+        flex: 1 1 45%;      /* twee per rij */
+      } 
+    }
+
+    @media(min-width:901px) { 
+      .options label, .category-options label, .language-options label { 
+        flex: 1 1 200px;    /* meerdere per rij */
+      } 
+    }
+
     .logo-left { position: absolute; top: 10px; left: 10px; width: 120px; }
     .logo-right { position: absolute; top: 10px; right: 10px; width: 180px; }
-    #extra-options, #cancel-options, #repair-options { display: none; flex-wrap: wrap; gap: 10px 20px; margin-top: 10px; justify-content:center; }
-    .language-options, .category-options { display:flex; justify-content:center; gap:40px; margin-top:10px; flex-wrap: wrap; }
-    .category-options label { gap: 8px; }
-    @media(max-width:900px) { .options label { flex: 1 1 45%; } }
-    @media(max-width:600px) { .options label { flex: 1 1 100%; } }
+    #extra-options, #cancel-options, #repair-options { display: none; }
   </style>
 </head>
 <body>
@@ -84,7 +96,6 @@
   <img src="https://www.threon.com/wp-content/uploads/2025/01/Mask-Group-92.png.webp" alt="BESIX Unitec" class="logo-right">
 
   <div class="card">
-    <!-- Titels naast elkaar bij openen -->
     <div class="titles">
       <h1 id="title-nl">Interventierapport</h1>
       <h1 id="title-fr">Rapport d'intervention</h1>
@@ -187,7 +198,6 @@
   </div>
 
   <script>
-    // Element referenties
     const installOk = document.getElementById('install-ok');
     const cancelOption = document.getElementById('cancel-option');
     const repairOption = document.getElementById('repair-option');
@@ -216,144 +226,45 @@
     const repairLabelNl = document.getElementById('repair-label-nl');
     const repairLabelFr = document.getElementById('repair-label-fr');
 
-    // Helper om alle checkboxen in een container te clearen
-    function clearChecks(container) {
-      container.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
-    }
+    function clearChecks(container) { container.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked=false); }
 
-    // Taal wisselen
-    langRadios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        actions.style.display = 'block';
+    langRadios.forEach(radio=>{
+      radio.addEventListener('change', ()=>{
+        actions.style.display='block';
+        installOk.checked=cancelOption.checked=repairOption.checked=false;
+        output.value='';
+        [extraOptions,cancelOptions,repairOptions].forEach(sec=>{clearChecks(sec); sec.style.display='none';});
 
-        // Reset categorie-keuzes en output
-        installOk.checked = false;
-        cancelOption.checked = false;
-        repairOption.checked = false;
-        output.value = '';
-
-        [extraOptions, cancelOptions, repairOptions].forEach(section => {
-          clearChecks(section);
-          section.style.display = 'none';
-        });
-
-        if (radio.value === 'nl') {
-          titlesNl.style.display = 'block';
-          titlesFr.style.display = 'none';
-          actionTitleNl.style.display = 'block';
-          actionTitleFr.style.display = 'none';
-
-          installLabelNl.style.display = 'inline';
-          installLabelFr.style.display = 'none';
-          cancelLabelNl.style.display = 'inline';
-          cancelLabelFr.style.display = 'none';
-          repairLabelNl.style.display = 'inline';
-          repairLabelFr.style.display = 'none';
-
-          nlOptions.style.display = 'flex';
-          frOptions.style.display = 'none';
-          nlCancel.style.display = 'flex';
-          frCancel.style.display = 'none';
-          nlRepair.style.display = 'flex';
-          frRepair.style.display = 'none';
+        if(radio.value==='nl'){
+          titlesNl.style.display='block'; titlesFr.style.display='none';
+          actionTitleNl.style.display='block'; actionTitleFr.style.display='none';
+          installLabelNl.style.display='inline'; installLabelFr.style.display='none';
+          cancelLabelNl.style.display='inline'; cancelLabelFr.style.display='none';
+          repairLabelNl.style.display='inline'; repairLabelFr.style.display='none';
+          nlOptions.style.display='flex'; frOptions.style.display='none';
+          nlCancel.style.display='flex'; frCancel.style.display='none';
+          nlRepair.style.display='flex'; frRepair.style.display='none';
         } else {
-          titlesNl.style.display = 'none';
-          titlesFr.style.display = 'block';
-          actionTitleNl.style.display = 'none';
-          actionTitleFr.style.display = 'block';
-
-          installLabelNl.style.display = 'none';
-          installLabelFr.style.display = 'inline';
-          cancelLabelNl.style.display = 'none';
-          cancelLabelFr.style.display = 'inline';
-          repairLabelNl.style.display = 'none';
-          repairLabelFr.style.display = 'inline';
-
-          nlOptions.style.display = 'none';
-          frOptions.style.display = 'flex';
-          nlCancel.style.display = 'none';
-          frCancel.style.display = 'flex';
-          nlRepair.style.display = 'none';
-          frRepair.style.display = 'flex';
+          titlesNl.style.display='none'; titlesFr.style.display='block';
+          actionTitleNl.style.display='none'; actionTitleFr.style.display='block';
+          installLabelNl.style.display='none'; installLabelFr.style.display='inline';
+          cancelLabelNl.style.display='none'; cancelLabelFr.style.display='inline';
+          repairLabelNl.style.display='none'; repairLabelFr.style.display='inline';
+          nlOptions.style.display='none'; frOptions.style.display='flex';
+          nlCancel.style.display='none'; frCancel.style.display='flex';
+          nlRepair.style.display='none'; frRepair.style.display='flex';
         }
       });
     });
 
-    // Categorie: Installatie
-    installOk?.addEventListener('change', () => {
-      extraOptions.style.display = installOk.checked ? 'flex' : 'none';
-      // Zorg dat andere secties uit staan
-      cancelOptions.style.display = 'none';
-      repairOptions.style.display = 'none';
+    installOk?.addEventListener('change',()=>{extraOptions.style.display=installOk.checked?'flex':'none'; cancelOptions.style.display=repairOptions.style.display='none'; if(installOk.checked){ cancelOption.checked=repairOption.checked=false; clearChecks(cancelOptions); clearChecks(repairOptions);} output.value='';});
+    cancelOption?.addEventListener('change',()=>{cancelOptions.style.display=cancelOption.checked?'flex':'none'; extraOptions.style.display=repairOptions.style.display='none'; if(cancelOption.checked){ installOk.checked=repairOption.checked=false; clearChecks(extraOptions); clearChecks(repairOptions);} output.value='';});
+    repairOption?.addEventListener('change',()=>{repairOptions.style.display=repairOption.checked?'flex':'none'; extraOptions.style.display=cancelOptions.style.display='none'; if(repairOption.checked){ installOk.checked=cancelOption.checked=false; clearChecks(extraOptions); clearChecks(cancelOptions);} output.value='';});
 
-      // Uncheck andere categorieën en clear hun keuzes
-      if (installOk.checked) {
-        cancelOption.checked = false;
-        repairOption.checked = false;
-        clearChecks(cancelOptions);
-        clearChecks(repairOptions);
-      }
-      output.value = '';
-    });
+    function generateTexts(){let result=''; [extraOptions,cancelOptions,repairOptions].forEach(sec=>{if(sec.style.display!=='none') sec.querySelectorAll('input[type=checkbox]:checked').forEach(cb=>{result+=cb.value+"\n\n";});}); output.value=result.trim();}
+    async function copyOutput(){try{await navigator.clipboard.writeText(output.value); alert('Resultaat gekopieerd!');} catch(e){output.select(); output.setSelectionRange(0,99999); document.execCommand('copy'); alert('Resultaat gekopieerd!');}}
 
-    // Categorie: Cancel
-    cancelOption?.addEventListener('change', () => {
-      cancelOptions.style.display = cancelOption.checked ? 'flex' : 'none';
-      extraOptions.style.display = 'none';
-      repairOptions.style.display = 'none';
-
-      if (cancelOption.checked) {
-        installOk.checked = false;
-        repairOption.checked = false;
-        clearChecks(extraOptions);
-        clearChecks(repairOptions);
-      }
-      output.value = '';
-    });
-
-    // Categorie: Repair
-    repairOption?.addEventListener('change', () => {
-      repairOptions.style.display = repairOption.checked ? 'flex' : 'none';
-      extraOptions.style.display = 'none';
-      cancelOptions.style.display = 'none';
-
-      if (repairOption.checked) {
-        installOk.checked = false;
-        cancelOption.checked = false;
-        clearChecks(extraOptions);
-        clearChecks(cancelOptions);
-      }
-      output.value = '';
-    });
-
-    // Tekst genereren op basis van aangevinkte opties (alleen uit zichtbare secties)
-    function generateTexts() {
-      let result = '';
-      [extraOptions, cancelOptions, repairOptions].forEach(section => {
-        if (section.style.display !== 'none') {
-          section.querySelectorAll('input[type=checkbox]:checked')
-            .forEach(cb => { result += cb.value + "\n\n"; });
-        }
-      });
-      output.value = result.trim();
-    }
-
-    // Kopiëren met moderne API + fallback
-    async function copyOutput() {
-      try {
-        await navigator.clipboard.writeText(output.value);
-        alert('Resultaat gekopieerd!');
-      } catch (e) {
-        output.select();
-        output.setSelectionRange(0, 99999);
-        document.execCommand('copy');
-        alert('Resultaat gekopieerd!');
-      }
-    }
-
-    // Exposeer functies voor buttons
-    window.generateTexts = generateTexts;
-    window.copyOutput = copyOutput;
+    window.generateTexts=generateTexts; window.copyOutput=copyOutput;
   </script>
 </body>
 </html>
