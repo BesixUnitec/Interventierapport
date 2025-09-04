@@ -55,7 +55,7 @@
       margin-top: 10px;
     }
 
-    /* Checkbox styling */
+    /* Checkbox / label styling */
     .options, .category-options, .language-options { 
       display: flex; 
       flex-wrap: wrap; 
@@ -67,10 +67,11 @@
     .options label, .category-options label, .language-options label { 
       display: flex; 
       align-items: center; 
-      flex: 1 1 100%;       /* standaard: volledige breedte op klein scherm */
+      flex: 1 1 100%;       /* volledige breedte op klein scherm */
       max-width: 100%; 
-      word-break: break-word; 
-      white-space: normal; 
+      white-space: normal;  
+      overflow-wrap: anywhere; /* breekt woorden alleen als het echt nodig is */
+      word-break: normal;  
     }
 
     @media(min-width:601px) and (max-width:900px) { 
@@ -193,7 +194,7 @@
 
       <button type="button" onclick="generateTexts()">Genereer / Générer</button>
       <button type="button" onclick="copyOutput()">Kopieer resultaat / Copier le résultat</button>
-      <textarea id="output" placeholder="Hier komt je resultaat... / Le résultat apparaîtra ici..."></textarea>
+      <textarea id="output" placeholder="Hier komt je resultaat... / Le résultat apparaîtra hier..."></textarea>
     </div>
   </div>
 
@@ -257,14 +258,49 @@
       });
     });
 
-    installOk?.addEventListener('change',()=>{extraOptions.style.display=installOk.checked?'flex':'none'; cancelOptions.style.display=repairOptions.style.display='none'; if(installOk.checked){ cancelOption.checked=repairOption.checked=false; clearChecks(cancelOptions); clearChecks(repairOptions);} output.value='';});
-    cancelOption?.addEventListener('change',()=>{cancelOptions.style.display=cancelOption.checked?'flex':'none'; extraOptions.style.display=repairOptions.style.display='none'; if(cancelOption.checked){ installOk.checked=repairOption.checked=false; clearChecks(extraOptions); clearChecks(repairOptions);} output.value='';});
-    repairOption?.addEventListener('change',()=>{repairOptions.style.display=repairOption.checked?'flex':'none'; extraOptions.style.display=cancelOptions.style.display='none'; if(repairOption.checked){ installOk.checked=cancelOption.checked=false; clearChecks(extraOptions); clearChecks(cancelOptions);} output.value='';});
+    installOk?.addEventListener('change',()=>{
+      extraOptions.style.display=installOk.checked?'flex':'none';
+      cancelOptions.style.display=repairOptions.style.display='none';
+      if(installOk.checked){ cancelOption.checked=repairOption.checked=false; clearChecks(cancelOptions); clearChecks(repairOptions);}
+      output.value='';
+    });
+    cancelOption?.addEventListener('change',()=>{
+      cancelOptions.style.display=cancelOption.checked?'flex':'none';
+      extraOptions.style.display=repairOptions.style.display='none';
+      if(cancelOption.checked){ installOk.checked=repairOption.checked=false; clearChecks(extraOptions); clearChecks(repairOptions);}
+      output.value='';
+    });
+    repairOption?.addEventListener('change',()=>{
+      repairOptions.style.display=repairOption.checked?'flex':'none';
+      extraOptions.style.display=cancelOptions.style.display='none';
+      if(repairOption.checked){ installOk.checked=cancelOption.checked=false; clearChecks(extraOptions); clearChecks(cancelOptions);}
+      output.value='';
+    });
 
-    function generateTexts(){let result=''; [extraOptions,cancelOptions,repairOptions].forEach(sec=>{if(sec.style.display!=='none') sec.querySelectorAll('input[type=checkbox]:checked').forEach(cb=>{result+=cb.value+"\n\n";});}); output.value=result.trim();}
-    async function copyOutput(){try{await navigator.clipboard.writeText(output.value); alert('Resultaat gekopieerd!');} catch(e){output.select(); output.setSelectionRange(0,99999); document.execCommand('copy'); alert('Resultaat gekopieerd!');}}
+    function generateTexts(){
+      let result='';
+      [extraOptions,cancelOptions,repairOptions].forEach(sec=>{
+        if(sec.style.display!=='none') sec.querySelectorAll('input[type=checkbox]:checked').forEach(cb=>{
+          result+=cb.value+"\n\n";
+        });
+      });
+      output.value=result.trim();
+    }
 
-    window.generateTexts=generateTexts; window.copyOutput=copyOutput;
+    async function copyOutput(){
+      try{
+        await navigator.clipboard.writeText(output.value);
+        alert('Resultaat gekopieerd!');
+      } catch(e){
+        output.select();
+        output.setSelectionRange(0,99999);
+        document.execCommand('copy');
+        alert('Resultaat gekopieerd!');
+      }
+    }
+
+    window.generateTexts=generateTexts; 
+    window.copyOutput=copyOutput;
   </script>
 </body>
 </html>
