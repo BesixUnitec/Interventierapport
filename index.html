@@ -6,7 +6,7 @@
   <title>Interventierapport / Rapport d'intervention</title>
   <style>
     :root {
-      --brand: #FF7900;
+      --brand:#FF7900;
     }
     * { box-sizing: border-box; }
     body {
@@ -55,27 +55,34 @@
       margin-top: 10px;
     }
 
-    .options, .category-options, .language-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 20px;
-      margin-top: 10px;
-      justify-content: center;
+    /* Checkbox styling */
+    .options, .category-options, .language-options { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 10px 20px; 
+      margin-top: 10px; 
+      justify-content: center; 
     }
 
-    .options label,
-    .category-options label,
-    .language-options label {
-      display: flex;
-      align-items: center;
-      flex: 1 1 220px;
-      min-width: 160px;
-      max-width: 100%;
-      white-space: nowrap;
-      padding: 6px 10px;
-      border-radius: 6px;
-      background: #f9f9f9;
-      cursor: pointer;
+    .options label, .category-options label, .language-options label { 
+      display: flex; 
+      align-items: center; 
+      flex: 1 1 100%;       /* standaard: volledige breedte op klein scherm */
+      max-width: 100%; 
+      word-break: break-word; 
+      white-space: normal; 
+    }
+
+    @media(min-width:601px) and (max-width:900px) { 
+      .options label, .category-options label, .language-options label { 
+        flex: 1 1 45%;      /* twee per rij */
+      } 
+    }
+
+    @media(min-width:901px) { 
+      .options label, .category-options label, .language-options label { 
+        flex: 1 1 200px;    /* meerdere per rij */
+      } 
     }
 
     .logo-left { position: absolute; top: 10px; left: 10px; width: 120px; }
@@ -88,7 +95,6 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" alt="Orange Belgium" class="logo-left">
   <img src="https://www.threon.com/wp-content/uploads/2025/01/Mask-Group-92.png.webp" alt="BESIX Unitec" class="logo-right">
 
-  <!-- Hoofdkaart -->
   <div class="card">
     <div class="titles">
       <h1 id="title-nl">Interventierapport</h1>
@@ -139,14 +145,58 @@
         </div>
       </div>
 
-      <!-- Output -->
+      <!-- Cancel opties -->
+      <div class="options" id="cancel-options">
+        <div id="nl-cancel">
+          <label><input type="checkbox" value="Klant niet aanwezig, telefonisch niet bereikbaar.">Klant niet aanwezig, telefonisch niet bereikbaar</label>
+          <label><input type="checkbox" value="Hoofdkabel van de klant is defect. Niet mogelijk om een nieuwe kabel te plaatsen.">Dropkabel defect/slecht signaal, niet mogelijk nieuwe te plaatsen</label>
+          <label><input type="checkbox" value="Hoofdkabel van de klant is defect. Offerte aangevraagd, Orange stuurt de offerte zo spoedig mogelijk naar het e-mailadres van de klant.">Offerte aangevraagd</label>
+          <label><input type="checkbox" value="Aansluiting buiten is volzet. Alle nodige informatie doorgegeven aan de netwerkbeheerder om de nodige aanpassingen uit te voeren.">Tap vol</label>
+          <label><input type="checkbox" value="Signaal op het aansluitpunt is niet ok. alle nodige informatie doorgegeven aan de netwerkbeheerder om dit probleem te komen oplossen.">Slecht signaal op de tap</label>
+        </div>
+        <div id="fr-cancel" style="display:none;">
+          <label><input type="checkbox" value="Client absent, non joignable par téléphone.">Client absent, non joignable</label>
+          <label><input type="checkbox" value="Câble principal du client défectueux. Impossible d'installer un nouveau câble.">Câble défectueux / pas possible d'installer un nouveau</label>
+          <label><input type="checkbox" value="Câble principal du client défectueux. Devis demandé, Orange enverra le devis à l'adresse e-mail du client dès que possible.">Devis demandé</label>
+          <label><input type="checkbox" value="La connexion extérieure est complète. Toutes les informations nécessaires ont été transmises au gestionnaire de réseau pour effectuer les ajustements requis.">Tap full</label>
+          <label><input type="checkbox" value="Le signal au point de connexion n'est pas conforme. Toutes les informations nécessaires ont été transmises au gestionnaire du réseau pour résoudre ce problème.">Signal faible au Tap</label>
+        </div>
+      </div>
+
+      <!-- Repair opties -->
+      <div class="options" id="repair-options">
+        <div id="nl-repair">
+          <label><input type="checkbox" value="Modem was defect, deze vervangen. Alles terug werkend bij de klant.">Modem defect</label>
+          <label><input type="checkbox" value="Netwerkverdeler was defect, deze vervangen. Alles terug werkend bij de klant.">NIU defect</label>
+          <label><input type="checkbox" value="Doosje voor de vaste lijn was defect, deze vervangen. Alles terug werkend bij de klant.">ATA defect</label>
+          <label><input type="checkbox" value="Tv box was defect, deze vervangen. Alles terug werkend bij de klant.">TV box defect</label>
+          <label><input type="checkbox" value="Slechte connector(en) vervangen. Alles terug werkend bij de klant.">Slechte connectoren</label>
+          <label><input type="checkbox" value="Bij aankomst hoofdkabel defect. Deze vervangen met toestemming van de klant, alles terug werkend.">Slechte signalen op de drop -> Vervangen</label>
+          <label><input type="checkbox" value="Hoofdkabel van de klant is defect, niet mogelijk deze te vervangen. Offerte aangevraagd, Orange stuurt de offerte zo spoedig mogelijk naar het e-mailadres van de klant.">Slechte signalen op de drop -> Offerte</label>
+          <label><input type="checkbox" value="Signaal op het aansluitpunt is niet ok. alle nodige informatie doorgegeven aan de netwerkbeheerder om dit probleem te komen oplossen.">Slecht signaal op de tap</label>
+          <label><input type="checkbox" value="Alle signalen en connectoren gecontroleerd, maar geen probleem gevonden.">Geen probleem gevonden bij de klant</label>
+          <label><input type="checkbox" value="De installatie werkte niet door een verkeerde manipulatie van de klant. Alles is nu correct aangesloten en functioneert weer.">Probleem veroorzaakt door de klant</label>
+        </div>
+        <div id="fr-repair" style="display:none;">
+          <label><input type="checkbox" value="Le modem était défectueux, remplacé. Tout fonctionne à nouveau chez le client.">Modem défectueux</label>
+          <label><input type="checkbox" value="L'amplificateur réseau était défectueux, remplacé. Tout fonctionne chez le client.">NIU défectueux</label>
+          <label><input type="checkbox" value="La téléphone fixe était défectueuse, remplacée. Tout fonctionne chez le client.">ATA défectueux</label>
+          <label><input type="checkbox" value="La TV box était défectueuse, remplacée. Tout fonctionne chez le client.">TV box défectueuse</label>
+          <label><input type="checkbox" value="Connecteur(s) défectueux remplacé(s). Tout fonctionne chez le client.">Connecteurs défectueux</label>
+          <label><input type="checkbox" value="À l'arrivée, le câble principal était défectueux. Remplacé avec l'accord du client, tout fonctionne.">Mauvais signal sur le câble principal -> Remplacement</label>
+          <label><input type="checkbox" value="Le câble principal du client est défectueux, impossible à remplacer. Devis demandé, Orange enverra le devis à l'adresse e-mail du client dès que possible.">Mauvais signal sur le câble principal -> Devis</label>
+          <label><input type="checkbox" value="Le signal au point de connexion n'est pas correct. Toutes les informations nécessaires ont été transmises au gestionnaire du réseau pour résoudre ce problème.">Mauvais signal au Tap</label>
+          <label><input type="checkbox" value="À l'arrivée, aucun problème constaté chez le client. Tous les signaux et connecteurs sont vérifiés et sont OK.">Aucun problème constaté chez le client</label>
+          <label><input type="checkbox" value="L'installation ne fonctionnait pas à cause d'une mauvaise manipulation du client. Tout est maintenant correctement installé et fonctionne à nouveau.">Problème causé par le client</label>
+        </div>
+      </div>
+
       <button type="button" onclick="generateTexts()">Genereer / Générer</button>
       <button type="button" onclick="copyOutput()">Kopieer resultaat / Copier le résultat</button>
       <textarea id="output" placeholder="Hier komt je resultaat... / Le résultat apparaîtra ici..."></textarea>
     </div>
   </div>
 
-  <!-- JavaScript -->
   <script>
     const installOk = document.getElementById('install-ok');
     const cancelOption = document.getElementById('cancel-option');
@@ -162,48 +212,59 @@
     const frOptions = document.getElementById('fr-options');
     const nlCancel = document.getElementById('nl-cancel');
     const frCancel = document.getElementById('fr-cancel');
+    const nlRepair = document.getElementById('nl-repair');
+    const frRepair = document.getElementById('fr-repair');
 
-    let currentLang = '';
+    const titlesNl = document.getElementById('title-nl');
+    const titlesFr = document.getElementById('title-fr');
+    const actionTitleNl = document.getElementById('action-title-nl');
+    const actionTitleFr = document.getElementById('action-title-fr');
+    const installLabelNl = document.getElementById('install-label-nl');
+    const installLabelFr = document.getElementById('install-label-fr');
+    const cancelLabelNl = document.getElementById('cancel-label-nl');
+    const cancelLabelFr = document.getElementById('cancel-label-fr');
+    const repairLabelNl = document.getElementById('repair-label-nl');
+    const repairLabelFr = document.getElementById('repair-label-fr');
 
-    langRadios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        currentLang = radio.value;
-        actions.style.display = 'block';
-        document.getElementById('title-nl').style.display = currentLang === 'nl' ? 'block' : 'none';
-        document.getElementById('title-fr').style.display = currentLang === 'fr' ? 'block' : 'none';
-        document.getElementById('action-title-nl').style.display = currentLang === 'nl' ? 'block' : 'none';
-        document.getElementById('action-title-fr').style.display = currentLang === 'fr' ? 'block' : 'none';
+    function clearChecks(container) { container.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked=false); }
 
-        document.getElementById('install-label-nl').style.display = currentLang === 'nl' ? 'inline' : 'none';
-        document.getElementById('install-label-fr').style.display = currentLang === 'fr' ? 'inline' : 'none';
-        document.getElementById('cancel-label-nl').style.display = currentLang === 'nl' ? 'inline' : 'none';
-        document.getElementById('cancel-label-fr').style.display = currentLang === 'fr' ? 'inline' : 'none';
-        document.getElementById('repair-label-nl').style.display = currentLang === 'nl' ? 'inline' : 'none';
-        document.getElementById('repair-label-fr').style.display = currentLang === 'fr' ? 'inline' : 'none';
+    langRadios.forEach(radio=>{
+      radio.addEventListener('change', ()=>{
+        actions.style.display='block';
+        installOk.checked=cancelOption.checked=repairOption.checked=false;
+        output.value='';
+        [extraOptions,cancelOptions,repairOptions].forEach(sec=>{clearChecks(sec); sec.style.display='none';});
 
-        nlOptions.style.display = currentLang === 'nl' ? 'flex' : 'none';
-        frOptions.style.display = currentLang === 'fr' ? 'flex' : 'none';
+        if(radio.value==='nl'){
+          titlesNl.style.display='block'; titlesFr.style.display='none';
+          actionTitleNl.style.display='block'; actionTitleFr.style.display='none';
+          installLabelNl.style.display='inline'; installLabelFr.style.display='none';
+          cancelLabelNl.style.display='inline'; cancelLabelFr.style.display='none';
+          repairLabelNl.style.display='inline'; repairLabelFr.style.display='none';
+          nlOptions.style.display='flex'; frOptions.style.display='none';
+          nlCancel.style.display='flex'; frCancel.style.display='none';
+          nlRepair.style.display='flex'; frRepair.style.display='none';
+        } else {
+          titlesNl.style.display='none'; titlesFr.style.display='block';
+          actionTitleNl.style.display='none'; actionTitleFr.style.display='block';
+          installLabelNl.style.display='none'; installLabelFr.style.display='inline';
+          cancelLabelNl.style.display='none'; cancelLabelFr.style.display='inline';
+          repairLabelNl.style.display='none'; repairLabelFr.style.display='inline';
+          nlOptions.style.display='none'; frOptions.style.display='flex';
+          nlCancel.style.display='none'; frCancel.style.display='flex';
+          nlRepair.style.display='none'; frRepair.style.display='flex';
+        }
       });
     });
 
-    [installOk, cancelOption, repairOption].forEach(option => {
-      option.addEventListener('change', () => {
-        extraOptions.style.display = installOk.checked ? 'block' : 'none';
-      });
-    });
+    installOk?.addEventListener('change',()=>{extraOptions.style.display=installOk.checked?'flex':'none'; cancelOptions.style.display=repairOptions.style.display='none'; if(installOk.checked){ cancelOption.checked=repairOption.checked=false; clearChecks(cancelOptions); clearChecks(repairOptions);} output.value='';});
+    cancelOption?.addEventListener('change',()=>{cancelOptions.style.display=cancelOption.checked?'flex':'none'; extraOptions.style.display=repairOptions.style.display='none'; if(cancelOption.checked){ installOk.checked=repairOption.checked=false; clearChecks(extraOptions); clearChecks(repairOptions);} output.value='';});
+    repairOption?.addEventListener('change',()=>{repairOptions.style.display=repairOption.checked?'flex':'none'; extraOptions.style.display=cancelOptions.style.display='none'; if(repairOption.checked){ installOk.checked=cancelOption.checked=false; clearChecks(extraOptions); clearChecks(cancelOptions);} output.value='';});
 
-    function generateTexts() {
-      let values = [];
-      const checkboxes = document.querySelectorAll('#extra-options input[type="checkbox"]:checked');
-      checkboxes.forEach(cb => values.push(cb.value));
-      output.value = values.join('\n');
-    }
+    function generateTexts(){let result=''; [extraOptions,cancelOptions,repairOptions].forEach(sec=>{if(sec.style.display!=='none') sec.querySelectorAll('input[type=checkbox]:checked').forEach(cb=>{result+=cb.value+"\n\n";});}); output.value=result.trim();}
+    async function copyOutput(){try{await navigator.clipboard.writeText(output.value); alert('Resultaat gekopieerd!');} catch(e){output.select(); output.setSelectionRange(0,99999); document.execCommand('copy'); alert('Resultaat gekopieerd!');}}
 
-    function copyOutput() {
-      output.select();
-      document.execCommand('copy');
-      alert("Gekopieerd naar klembord!");
-    }
+    window.generateTexts=generateTexts; window.copyOutput=copyOutput;
   </script>
 </body>
 </html>
