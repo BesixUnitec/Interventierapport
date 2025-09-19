@@ -17,7 +17,7 @@
       padding-top: 150px;
     }
     h1 { color: var(--brand); margin: 5px 10px; }
-    h2 { text-align: center; margin: 5px 0; font-size: 18px; color: #333; }
+    h2 { text-align: center; margin: 10px 0; font-size: 18px; color: #333; }
     .titles {
       display: flex;
       justify-content: center;
@@ -28,7 +28,7 @@
     }
     .card {
       background: white;
-      padding: 20px;
+      padding: 25px;
       margin: 20px 0;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -38,61 +38,63 @@
       background: var(--brand);
       color: white;
       border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
+      padding: 12px 18px;
+      border-radius: 8px;
       cursor: pointer;
-      margin: 5px;
+      margin: 8px;
       font-weight: bold;
     }
     button:hover { background: #e06a00; }
     textarea {
       width: 100%;
-      height: 160px;
-      border-radius: 6px;
+      height: 180px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      padding: 8px;
+      padding: 10px;
       resize: vertical;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     /* Checkbox / label styling */
     .options, .category-options, .language-options { 
       display: flex; 
       flex-wrap: wrap; 
-      gap: 10px 20px; 
-      margin-top: 10px; 
+      gap: 12px 20px; 
+      margin-top: 12px; 
       justify-content: center; 
     }
 
     .options label, .category-options label, .language-options label { 
       display: flex; 
-      align-items: center; 
-      flex: 1 1 100%;       /* volledige breedte op klein scherm */
+      align-items: flex-start; 
+      flex: 1 1 100%;       
       max-width: 100%; 
       white-space: normal;  
-      overflow-wrap: anywhere; /* breekt woorden alleen als het echt nodig is */
-      word-break: normal;  
+      overflow-wrap: anywhere; 
+      word-break: break-word;  
+      padding: 6px 8px;
+      background: #fafafa;
+      border-radius: 6px;
     }
 
     @media(min-width:601px) and (max-width:900px) { 
       .options label, .category-options label, .language-options label { 
-        flex: 1 1 45%;      /* twee per rij */
+        flex: 1 1 45%;      
       } 
     }
 
     @media(min-width:901px) { 
       .options label, .category-options label, .language-options label { 
-        flex: 1 1 200px;    /* meerdere per rij */
+        flex: 1 1 200px;    
       } 
     }
 
     .logo-left { position: absolute; top: 10px; left: 10px; width: 120px; }
     .logo-right { position: absolute; top: 10px; right: 10px; width: 180px; }
-    #extra-options, #cancel-options, #repair-options { display: none; }
+    #extra-options, #cancel-options, #repair-options, #survey-options { display: none; }
   </style>
 </head>
 <body>
-  <!-- Logos -->
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" alt="Orange Belgium" class="logo-left">
   <img src="https://www.threon.com/wp-content/uploads/2025/01/Mask-Group-92.png.webp" alt="BESIX Unitec" class="logo-right">
 
@@ -116,6 +118,7 @@
         <label><input type="checkbox" id="install-ok"> <span id="install-label-nl">Installatie ok</span><span id="install-label-fr" style="display:none;">Installation OK</span></label>
         <label><input type="checkbox" id="cancel-option"> <span id="cancel-label-nl">Cancel</span><span id="cancel-label-fr" style="display:none;">Annulation</span></label>
         <label><input type="checkbox" id="repair-option"> <span id="repair-label-nl">Repair</span><span id="repair-label-fr" style="display:none;">Réparation</span></label>
+        <label><input type="checkbox" id="survey-option"> <span id="survey-label-nl">Site survey</span><span id="survey-label-fr" style="display:none;">Site survey</span></label>
       </div>
 
       <!-- Installatie opties -->
@@ -130,7 +133,8 @@
           <label><input type="checkbox" value="Booster voorgesteld maar niet gewenst.">Klant wenst geen booster</label>
           <label><input type="checkbox" value="Klant heeft een eigen netwerkapparatuur.">Klant heeft eigen (draadloos)netwerk</label>
           <label><input type="checkbox" value="Nieuwe hoofdkabel geplaatst voor de klant, klant gaat akkoord met de doorboring van de gevel.">Dropkabel geplaatst</label>
-          <label><input type="checkbox" value="Tijdelijke kabel geplaatst van de installatie naar de TV box, klant werkt deze later weg.">Tijdelijke kabel geplaatst niu-> TV box</label>
+          <label><input type="checkbox" value="Tijdelijke kabel geplaatst van de installatie naar de TV box, klant werkt deze later weg.">Tijdelijke kabel geplaatst NIU -> TV box</label>
+          <label><input type="checkbox" value="Airbox als noodoplossing bij problemen achtergelaten .">VIP klant, Airobx ok</label>
           <label><input type="checkbox" value="Activatie probleem, Orange volgt dit vanop afstand op.">Activatie probleem</label>
         </div>
         <div id="fr-options" style="display:none;">
@@ -141,9 +145,10 @@
           <label><input type="checkbox" value="Test de vitesse effectué dans les zones où le client souhaite utiliser Internet.">Test de vitesse effectué</label>
           <label><input type="checkbox" value="Booster installé, le client accepte le prix de location.">Booster</label>
           <label><input type="checkbox" value="Booster proposé mais non désiré.">Client ne souhaite pas de booster</label>
-          <label><input type="checkbox" value="Le client dipose de son propre équipement réseau.">Le client possède son propre réseau (sans fil) </label>
+          <label><input type="checkbox" value="Le client dipose de son propre équipement réseau.">Le client possède son propre réseau (sans fil)</label>
           <label><input type="checkbox" value="Nouveau câble principal installé pour le client, le client accepte le percement de la façade.">Dropcâble installé</label>
           <label><input type="checkbox" value="Câble temporaire placé de l’installation vers le boîtier TV, le client l’arrangera plus tard.">Câble temporaire placé NIU → boîtier TV</label>
+          <label><input type="checkbox" value="Airbox laissée au client comme solution de secours en cas de problèmes.">Client VIP, Airbox ok</label>
           <label><input type="checkbox" value="Problème d'activation, Orange suit à distance.">Problème d'activation</label>
         </div>
       </div>
@@ -154,16 +159,18 @@
           <label><input type="checkbox" value="Klant niet aanwezig, telefonisch niet bereikbaar.">Klant niet aanwezig, telefonisch niet bereikbaar</label>
           <label><input type="checkbox" value="Hoofdkabel van de klant is defect. Niet mogelijk om een nieuwe kabel te plaatsen.">Dropkabel defect/slecht signaal, niet mogelijk nieuwe te plaatsen</label>
           <label><input type="checkbox" value="Hoofdkabel van de klant is defect. Offerte aangevraagd, Orange stuurt de offerte zo spoedig mogelijk naar het e-mailadres van de klant.">Offerte aangevraagd</label>
-          <label><input type="checkbox" value="Problemen met de hoofdkabel, klant moet eerst aan de huisbaas toemstemming vragen om te boren">klant moet toestemming vragen om te boren</label>
+          <label><input type="checkbox" value="Problemen met de hoofdkabel, klant moet eerst aan de huisbaas toestemming vragen om te boren">Klant moet toestemming vragen om te boren</label>
           <label><input type="checkbox" value="Aansluiting buiten is volzet. Alle nodige informatie doorgegeven aan de netwerkbeheerder om de nodige aanpassingen uit te voeren.">Tap vol</label>
+          <label><input type="checkbox" value="Nieuwe hoofdkabel geplaatst voor de klant, klant gaat akkoord met de doorboring van de gevel.">Dropkabel geplaatst</label>
           <label><input type="checkbox" value="Signaal op het aansluitpunt is niet ok. alle nodige informatie doorgegeven aan de netwerkbeheerder om dit probleem te komen oplossen.">Slecht signaal op de tap</label>
         </div>
         <div id="fr-cancel" style="display:none;">
           <label><input type="checkbox" value="Client absent, non joignable par téléphone.">Client absent, non joignable</label>
           <label><input type="checkbox" value="Câble principal du client défectueux. Impossible d'installer un nouveau câble.">Câble défectueux / pas possible d'installer un nouveau</label>
           <label><input type="checkbox" value="Câble principal du client défectueux. Devis demandé, Orange enverra le devis à l'adresse e-mail du client dès que possible.">Devis demandé</label>
-          <label><input type="checkbox" value="Problèmes avec le câble principal, le client doit d’abord demander l’autorisation au propriétaire pour percer">le client doit demander l’autorisation pour percer</label>
+          <label><input type="checkbox" value="Problèmes avec le câble principal, le client doit d’abord demander l’autorisation au propriétaire pour percer">Le client doit demander l’autorisation pour percer</label>
           <label><input type="checkbox" value="La connexion extérieure est complète. Toutes les informations nécessaires ont été transmises au gestionnaire de réseau pour effectuer les ajustements requis.">Tap full</label>
+          <label><input type="checkbox" value="Nouveau câble principal installé pour le client, le client accepte le percement de la façade.">Dropcâble installé</label>
           <label><input type="checkbox" value="Le signal au point de connexion n'est pas conforme. Toutes les informations nécessaires ont été transmises au gestionnaire du réseau pour résoudre ce problème.">Signal faible au Tap</label>
         </div>
       </div>
@@ -181,6 +188,7 @@
           <label><input type="checkbox" value="Signaal op het aansluitpunt is niet ok. alle nodige informatie doorgegeven aan de netwerkbeheerder om dit probleem te komen oplossen.">Slecht signaal op de tap</label>
           <label><input type="checkbox" value="Alle signalen en connectoren gecontroleerd, maar geen probleem gevonden.">Geen probleem gevonden bij de klant</label>
           <label><input type="checkbox" value="De installatie werkte niet door een verkeerde manipulatie van de klant. Alles is nu correct aangesloten en functioneert weer.">Probleem veroorzaakt door de klant</label>
+          <label><input type="checkbox" value="Activatie probleem, Orange volgt dit vanop afstand op.">Activatie probleem</label>
         </div>
         <div id="fr-repair" style="display:none;">
           <label><input type="checkbox" value="Le modem était défectueux, remplacé. Tout fonctionne à nouveau chez le client.">Modem défectueux</label>
@@ -193,6 +201,21 @@
           <label><input type="checkbox" value="Le signal au point de connexion n'est pas correct. Toutes les informations nécessaires ont été transmises au gestionnaire du réseau pour résoudre ce problème.">Mauvais signal au Tap</label>
           <label><input type="checkbox" value="À l'arrivée, aucun problème constaté chez le client. Tous les signaux et connecteurs sont vérifiés et sont OK.">Aucun problème constaté chez le client</label>
           <label><input type="checkbox" value="L'installation ne fonctionnait pas à cause d'une mauvaise manipulation du client. Tout est maintenant correctement installé et fonctionne à nouveau.">Problème causé par le client</label>
+          <label><input type="checkbox" value="Problème d'activation, Orange suit à distance.">Problème d'activation</label>
+        </div>
+      </div>
+
+      <!-- Site survey opties -->
+      <div class="options" id="survey-options">
+        <div id="nl-survey">
+          <label><input type="checkbox" value="Er is een hoofdkabel aanwezig, installatie mogelijk.">Dropkabel aanwezig en goed signaal, netwerk ok, geen speciale situaties</label>
+          <label><input type="checkbox" value="Geen hoofdkabel aanwezig in het gebouw, ook is het niet mogelijk om een kabel te trekken wegens geen netwerk in de buurt om de kabel op aan te sluiten.">Geen drop en netwerk in de straat</label>
+          <label><input type="checkbox" value="Er is geen hoofdkabel aanwezig, offerte nodig. Orange stuurt de offerte zo spoedig mogelijk naar het e-mailadres naar de klant">Geen kabel aanwezig, offerte nodig</label>
+        </div>
+        <div id="fr-survey" style="display:none;">
+          <label><input type="checkbox" value="Un câble principal est présent, installation possible.">Dropkabel présent, installation possible</label>
+          <label><input type="checkbox" value="Aucun câble principal présent dans le bâtiment, il n’est pas non plus possible de tirer un câble car aucun réseau à proximité pour le raccorder.">Pas de drop et pas de réseau dans la rue</label>
+          <label><input type="checkbox" value="Aucun câble principal présent, devis nécessaire. Orange enverra le devis dès que possible à l’adresse e-mail du client">Pas de câble présent, devis nécessaire</label>
         </div>
       </div>
 
@@ -206,19 +229,24 @@
     const installOk = document.getElementById('install-ok');
     const cancelOption = document.getElementById('cancel-option');
     const repairOption = document.getElementById('repair-option');
+    const surveyOption = document.getElementById('survey-option');
     const extraOptions = document.getElementById('extra-options');
     const cancelOptions = document.getElementById('cancel-options');
     const repairOptions = document.getElementById('repair-options');
+    const surveyOptions = document.getElementById('survey-options');
     const output = document.getElementById('output');
 
     const langRadios = document.querySelectorAll('input[name="language"]');
     const actions = document.getElementById('actions');
+
     const nlOptions = document.getElementById('nl-options');
     const frOptions = document.getElementById('fr-options');
     const nlCancel = document.getElementById('nl-cancel');
     const frCancel = document.getElementById('fr-cancel');
     const nlRepair = document.getElementById('nl-repair');
     const frRepair = document.getElementById('fr-repair');
+    const nlSurvey = document.getElementById('nl-survey');
+    const frSurvey = document.getElementById('fr-survey');
 
     const titlesNl = document.getElementById('title-nl');
     const titlesFr = document.getElementById('title-fr');
@@ -230,15 +258,17 @@
     const cancelLabelFr = document.getElementById('cancel-label-fr');
     const repairLabelNl = document.getElementById('repair-label-nl');
     const repairLabelFr = document.getElementById('repair-label-fr');
+    const surveyLabelNl = document.getElementById('survey-label-nl');
+    const surveyLabelFr = document.getElementById('survey-label-fr');
 
     function clearChecks(container) { container.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked=false); }
 
     langRadios.forEach(radio=>{
       radio.addEventListener('change', ()=>{
         actions.style.display='block';
-        installOk.checked=cancelOption.checked=repairOption.checked=false;
+        installOk.checked=cancelOption.checked=repairOption.checked=surveyOption.checked=false;
         output.value='';
-        [extraOptions,cancelOptions,repairOptions].forEach(sec=>{clearChecks(sec); sec.style.display='none';});
+        [extraOptions,cancelOptions,repairOptions,surveyOptions].forEach(sec=>{clearChecks(sec); sec.style.display='none';});
 
         if(radio.value==='nl'){
           titlesNl.style.display='block'; titlesFr.style.display='none';
@@ -246,44 +276,54 @@
           installLabelNl.style.display='inline'; installLabelFr.style.display='none';
           cancelLabelNl.style.display='inline'; cancelLabelFr.style.display='none';
           repairLabelNl.style.display='inline'; repairLabelFr.style.display='none';
+          surveyLabelNl.style.display='inline'; surveyLabelFr.style.display='none';
           nlOptions.style.display='flex'; frOptions.style.display='none';
           nlCancel.style.display='flex'; frCancel.style.display='none';
           nlRepair.style.display='flex'; frRepair.style.display='none';
+          nlSurvey.style.display='flex'; frSurvey.style.display='none';
         } else {
           titlesNl.style.display='none'; titlesFr.style.display='block';
           actionTitleNl.style.display='none'; actionTitleFr.style.display='block';
           installLabelNl.style.display='none'; installLabelFr.style.display='inline';
           cancelLabelNl.style.display='none'; cancelLabelFr.style.display='inline';
           repairLabelNl.style.display='none'; repairLabelFr.style.display='inline';
+          surveyLabelNl.style.display='none'; surveyLabelFr.style.display='inline';
           nlOptions.style.display='none'; frOptions.style.display='flex';
           nlCancel.style.display='none'; frCancel.style.display='flex';
           nlRepair.style.display='none'; frRepair.style.display='flex';
+          nlSurvey.style.display='none'; frSurvey.style.display='flex';
         }
       });
     });
 
     installOk?.addEventListener('change',()=>{
       extraOptions.style.display=installOk.checked?'flex':'none';
-      cancelOptions.style.display=repairOptions.style.display='none';
-      if(installOk.checked){ cancelOption.checked=repairOption.checked=false; clearChecks(cancelOptions); clearChecks(repairOptions);}
+      cancelOptions.style.display=repairOptions.style.display=surveyOptions.style.display='none';
+      if(installOk.checked){ cancelOption.checked=repairOption.checked=surveyOption.checked=false; clearChecks(cancelOptions); clearChecks(repairOptions); clearChecks(surveyOptions);}
       output.value='';
     });
     cancelOption?.addEventListener('change',()=>{
       cancelOptions.style.display=cancelOption.checked?'flex':'none';
-      extraOptions.style.display=repairOptions.style.display='none';
-      if(cancelOption.checked){ installOk.checked=repairOption.checked=false; clearChecks(extraOptions); clearChecks(repairOptions);}
+      extraOptions.style.display=repairOptions.style.display=surveyOptions.style.display='none';
+      if(cancelOption.checked){ installOk.checked=repairOption.checked=surveyOption.checked=false; clearChecks(extraOptions); clearChecks(repairOptions); clearChecks(surveyOptions);}
       output.value='';
     });
     repairOption?.addEventListener('change',()=>{
       repairOptions.style.display=repairOption.checked?'flex':'none';
-      extraOptions.style.display=cancelOptions.style.display='none';
-      if(repairOption.checked){ installOk.checked=cancelOption.checked=false; clearChecks(extraOptions); clearChecks(cancelOptions);}
+      extraOptions.style.display=cancelOptions.style.display=surveyOptions.style.display='none';
+      if(repairOption.checked){ installOk.checked=cancelOption.checked=surveyOption.checked=false; clearChecks(extraOptions); clearChecks(cancelOptions); clearChecks(surveyOptions);}
+      output.value='';
+    });
+    surveyOption?.addEventListener('change',()=>{
+      surveyOptions.style.display=surveyOption.checked?'flex':'none';
+      extraOptions.style.display=cancelOptions.style.display=repairOptions.style.display='none';
+      if(surveyOption.checked){ installOk.checked=cancelOption.checked=repairOption.checked=false; clearChecks(extraOptions); clearChecks(cancelOptions); clearChecks(repairOptions);}
       output.value='';
     });
 
     function generateTexts(){
       let result='';
-      [extraOptions,cancelOptions,repairOptions].forEach(sec=>{
+      [extraOptions,cancelOptions,repairOptions,surveyOptions].forEach(sec=>{
         if(sec.style.display!=='none') sec.querySelectorAll('input[type=checkbox]:checked').forEach(cb=>{
           result+=cb.value+"\n\n";
         });
