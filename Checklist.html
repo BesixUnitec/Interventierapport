@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installatie checklist</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.5;
+}
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+h1 { color: #FF7900; }
+h2 { margin-top: 30px; }
+h3 { margin-top: 20px; }
+ul { margin-left: 20px; }
+li { margin-bottom: 6px; }
+
+.lang-switch {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.lang-switch button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #FF7900;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.lang-switch button:hover {
+  background: #e06a00;
+}
+
+.section { display: none; }
+
+.note {
+  margin-top: 25px;
+  padding: 15px;
+  background: #fff3e6;
+  border-left: 5px solid #FF7900;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="lang-switch">
+  <button onclick="showLang('nl')">Nederlands</button>
+  <button onclick="showLang('fr')">Français</button>
+</div>
+
+<!-- ================= NL ================= -->
+<div id="nl" class="section">
+
+<h1>Installatie checklist</h1>
+
+<h2>Customer Check</h2>
+<ul>
+  <li>Controleer het adres en het e-mailadres van de klant.</li>
+  <li>Vraag toestemming om foto’s te nemen voor en na de installatie.</li>
+  <li>Overloop de aangevraagde diensten + kijk rond in de woning of alles technisch mogelijk is, pols of er wifi boosters nodig zijn.</li>
+</ul>
+
+<h2>Installatie</h2>
+
+<h3>Foto's nemen</h3>
+<ul>
+  <li>Foto van de modem/installatieplaats</li>
+  <li>Foto van de locatie voor de TV-box (decoder vorige provider of lege tv kast/schap)</li>
+</ul>
+
+<h3>Signaalcontrole DOCSIS Check (+ Channel Check indien ook TV) of OneCheck</h3>
+<ul>
+  <li>Indien signaal OK → start installatie</li>
+  <li>Indien geen signaal →
+    <ul>
+      <li>Tapsignaal en filterstatus controleren</li>
+      <li>Connector aan de tap vervangen indien nodig</li>
+      <li>Controleer/plaats het SAPid</li>
+      <li>Vergeet geen ‘voor’ en ‘na’ foto te nemen van de outdoor situatie</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Hardware & Aansluitingen</h3>
+<ul>
+  <li>Controleer het signaal op de dropkabel/NIU</li>
+  <li>Connectoren aan NIU controleren en indien nodig vervangen</li>
+  <li>Hardware activeren in Installer Field</li>
+  <li>Modem aansluiten en download laten starten</li>
+  <li>TV-box plaatsen zodra modem download begonnen is</li>
+  <li>Download van TV-box starten zodra modem in dienst is + regelmatig opvolgen of TV-box installatie verder kan doorlopen worden.</li>
+  <li>Vraag toestemming aan de klant om te boren en voer het esthetische werk uit:
+    <ul>
+      <li>NIU tegen muur bevestigen</li>
+      <li>Modem tegen muur bevestigen</li>
+      <li>Vuil en boorstof opkuisen</li>
+      <li>Materiaal opruimen</li>
+    </ul>
+  </li>
+  <li>Verbind, indien nodig, de Booster met de modem via UTP</li>
+</ul>
+
+<p>De Booster zal ondertussen koppelen met de modem en updates binnen halen</p>
+
+<ul>
+  <li>QC uitvoeren + Materiaal doorgeven via materiaaltool (Power Apps)</li>
+  <li>Verplaats de Booster naar de ruimte waar nodig en op correcte afstand van de modem (zie Topologie):
+    <ul>
+      <li>Neem een screenshot/foto van de Topologie!</li>
+      <li>Voer opnieuw een speedtest uit op de locatie waar booster staat.</li>
+    </ul>
+  </li>
+  <li>Internetdemo geven + internet testen op toestel van de klant.</li>
+  <li>Companion app uitvoeren (printscreen nemen en resultaat tonen aan de klant)</li>
+  <li>Demo geven van de TV-box:
+    <ul>
+      <li>Vergeet niet te vermelden dat er ook een TV-app beschikbaar is</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Afronden van de Installatie</h2>
+<ul>
+  <li>Vergeet de ‘na’ foto’s niet te nemen (installatieplaats, TV-box, Booster + Topologie en NIU waarop de afsluitweerstanden en connectoren goed zichtbaar zijn)</li>
+  <li>Vragen van de klant beantwoorden</li>
+  <li>Interventierapport invullen:
+    <ul>
+      <li>Commentaartool gebruiken (staat bij je snelkoppelingen in de internetbrowser)</li>
+      <li>Wifi-codes en pincodes invoeren</li>
+      <li>Alle foto’s toevoegen en volledigheid controleren</li>
+      <li>Het volledige rapport samen overlopen met de klant</li>
+      <li>Klant laten tekenen</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Foto’s</h2>
+<ul>
+  <li>Voor en na foto van de modem/installatie plaats.</li>
+  <li>Voor en na foto van de locatie van de TV-box.</li>
+  <li>Foto van de signaalwaarden van de TV-box.</li>
+  <li>Printscreen/foto van het resultaat van de Companion app.</li>
+  <li>Foto van extra geplaatste hardware (Airbox, Mesh booster etc.).</li>
+  <li>Heb je een Booster geïnstalleerd? Vergeet dan ook geen foto van je Topologie.</li>
+  <li>Voor en na foto als je buiten iets hebt moeten aanpassen.</li>
+</ul>
+
+<div class="note">
+  <p><strong>Heb je vragen of ga je een cancel hebben?</strong><br>
+  Contacteer steeds de dispatch: <strong>03 610 10 79</strong></p>
+  <p><strong>Problemen met activatie?</strong><br>
+  Contacteer provisioning: <strong>0800 85 032</strong></p>
+</div>
+
+</div>
+
+<!-- ================= FR ================= -->
+<div id="fr" class="section">
+
+<h1>Checklist d’installation</h1>
+
+<h2>Customer Check</h2>
+<ul>
+  <li>Vérifier l’adresse et l’adresse e-mail du client.</li>
+  <li>Demander l’autorisation de prendre des photos avant et après l’installation.</li>
+  <li>Passer en revue les services demandés + vérifier dans le logement si tout est techniquement possible, contrôlez si des boosters Wi-Fi sont nécessaires.</li>
+</ul>
+
+<h2>Installation</h2>
+
+<h3>Prendre des photos</h3>
+<ul>
+  <li>Photo du modem / lieu d’installation</li>
+  <li>Photo de l’emplacement de la TV-box (décodeur de l’ancien fournisseur ou meuble/étagère TV vide)</li>
+</ul>
+
+<h3>Contrôle du signal DOCSIS Check (+ Channel Check si TV) ou OneCheck</h3>
+<ul>
+  <li>Si le signal est OK → démarrer l’installation</li>
+  <li>Si aucun signal →
+    <ul>
+      <li>Vérifier le signal au tap et l’état du filtre</li>
+      <li>Remplacer le connecteur au tap si nécessaire</li>
+      <li>vérifiez/placez le SAPid</li>
+      <li>Ne pas oublier de prendre des photos « avant » et « après » de la situation extérieure</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Matériel & Connexions</h3>
+<ul>
+  <li>Vérifier le signal sur le dropcâble/NIU</li>
+  <li>Contrôler les connecteurs au NIU et les remplacer si nécessaire</li>
+  <li>Activer le matériel dans Installer Field</li>
+  <li>Brancher le modem et laisser le téléchargement démarrer</li>
+  <li>Placer la TV-box dès que le téléchargement du modem a commencé</li>
+  <li>Démarrer le téléchargement de la TV-box dès que le modem est en service + suivre régulièrement si l’installation peut continuer.</li>
+  <li>Demander l’autorisation au client pour percer et effectuer le travail esthétique :
+    <ul>
+      <li>Fixer le NIU au mur</li>
+      <li>Fixer le modem au mur</li>
+      <li>Nettoyer la poussière et les déchets de perçage</li>
+      <li>Ranger le matériel</li>
+    </ul>
+  </li>
+  <li>Connecter, si nécessaire, le Booster au modem via UTP</li>
+</ul>
+
+<p>Le Booster se connectera entre-temps au modem et téléchargera les mises à jour</p>
+
+<ul>
+  <li>Effectuer le QC + transmettre le matériel via l’application (Power Apps)</li>
+  <li>Déplacer le Booster vers la pièce nécessaire à la distance correcte du modem (voir Topologie) :
+    <ul>
+      <li>Prendre une capture d’écran / photo de la Topologie !</li>
+      <li>Effectuer à nouveau un speedtest à l’emplacement du Booster.</li>
+    </ul>
+  </li>
+  <li>Faire une démonstration Internet + tester Internet sur l’appareil du client.</li>
+  <li>Exécuter l’application Companion (prendre une capture d’écran et montrer le résultat au client)</li>
+  <li>Faire une démonstration de la TV-box :
+    <ul>
+      <li>Ne pas oublier de mentionner qu’une application TV est également disponible</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Finalisation de l’installation</h2>
+<ul>
+  <li>Ne pas oublier de prendre les photos « après » (lieu d’installation, TV-box, Booster + Topologie et NIU sans cache avec résistances de terminaison et connecteurs bien visibles)</li>
+  <li>Répondre aux questions du client</li>
+  <li>Compléter le rapport d’intervention :
+    <ul>
+      <li>Utiliser l’outil de commentaires (raccourci dans le navigateur Internet)</li>
+      <li>Encoder les codes Wi-Fi et les codes PIN</li>
+      <li>Ajouter toutes les photos et vérifier la complétude</li>
+      <li>Passer en revue l’intégralité du rapport avec le client</li>
+      <li>Faire signer le client</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Photos</h2>
+<ul>
+  <li>Photos avant et après du modem / lieu d’installation.</li>
+  <li>Photos avant et après de l’emplacement de la TV-box.</li>
+  <li>Photo des valeurs de signal de la TV-box.</li>
+  <li>Capture d’écran / photo du résultat de l’application Companion.</li>
+  <li>Photo du matériel supplémentaire installé (Airbox, Mesh booster, etc.).</li>
+  <li>Un Booster a été installé ? Ne pas oublier la photo de la Topologie.</li>
+  <li>Photos avant et après si une modification extérieure a été effectuée.</li>
+</ul>
+
+<div class="note">
+  <p><strong>Des questions ou un cancel à prévoir ?</strong><br>
+  Contacter la dispatch : <strong>03 610 10 79</strong></p>
+  <p><strong>Problèmes d’activation ?</strong><br>
+  Contacter le provisioning : <strong>0800 85 032</strong></p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function showLang(lang){
+  document.getElementById('nl').style.display = 'none';
+  document.getElementById('fr').style.display = 'none';
+  document.getElementById(lang).style.display = 'block';
+}
+showLang('nl');
+</script>
+
+</body>
+</html>
