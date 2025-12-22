@@ -90,13 +90,13 @@ summary {
   <li>Bij voorkeur verbinden via UTP-kabel.</li>
   <li>WPS mogelijk maar afgeraden.</li>
   <li>LED moet groen branden.</li>
-  <li>RSSI controleren (&lt; -79 dBm = OK) + foto in rapport.</li>
-  <li>Speedtest uitvoeren op locatie van de booster.</li>
+  <li>RSSI controleren op de pagina 'Topologie' van de modem (&lt; -79 dBm = OK) + foto in rapport.</li>
+  <li>Speedtest uitvoeren via Companion app op locatie van de booster.</li>
 </ul>
 
 <h3>MOCA</h3>
 <ul>
-  <li>Kostprijs MoCA: €69.</li>
+  <li>Kostprijs MOCA: €69.</li>
   <li>Volgorde van de MOCA-toestellen is niet belangrijk.</li>
   <li>Van NIU TV-poort naar CATV-aansluiting.</li>
   <li>Binnenhuiskabel op COM-poort.</li>
@@ -110,14 +110,14 @@ summary {
 
 <h3>RX-waarden</h3>
 <ul>
-  <li>Dropkabel: -8 dB tot +13 dB.</li>
-  <li>Modem: -4 dB tot +17 dB.</li>
+  <li>Dropkabel: -8 dBmV tot +13 dBmV</li>
+  <li>Modem: -4 dBmV tot +17 dBmV</li>
 </ul>
 
 <h3>TX-waarden</h3>
 <ul>
-  <li>Normaal tussen 25 dB en 47 dB.</li>
-  <li><strong>TX &lt; 25 dB → RPA 12 plaatsen.</strong></li>
+  <li>Normaal tussen 25 dBmV en 47 dBmV</li>
+  <li><strong>TX &lt; 25 dBmV → RPA 12 plaatsen.</strong></li>
   <li>Te hoge TX mogelijk door tap, connectoren of dropkabel.</li>
   <li>Start met meten op RFin.</li>
   <li>Vervang preventief connector bij slechte meting.</li>
@@ -167,7 +167,7 @@ summary {
 <div id="ofdma">
 <h4>OFDMA – Upstream signalen</h4>
 <ul>
-  <li>TX: 25 – 47 dB (gemiddeld ± 34.8 dB)</li>
+  <li>TX: 25 – 47 dBmV (gemiddeld ± 34.8 dBmV)</li>
   <li>ICFR (Tilt OFDMA): &lt; 2 dB</li>
 </ul>
 
@@ -210,8 +210,8 @@ summary {
   <li>Connexion recommandée via câble UTP.</li>
   <li>WPS possible mais déconseillé.</li>
   <li>LED verte obligatoire.</li>
-  <li>Contrôler le RSSI (&lt; -79 dBm = OK) + photo dans le rapport.</li>
-  <li>Effectuer un speedtest à l’emplacement du booster.</li>
+  <li>Contrôler le RSSI sur le page 'Topologie' (&lt; -79 dBm = OK) + photo dans le rapport.</li>
+  <li>Effectuer un speedtest avec Companion app à l’emplacement du booster.</li>
 </ul>
 
 <h3>MOCA</h3>
@@ -228,16 +228,16 @@ summary {
 <details>
 <summary>Mesures de signal</summary>
 
-<h3>RX-waarden</h3>
+<h3>RX</h3>
 <ul>
-  <li>Câble drop: -8 dB à +13 dB</li>
-  <li>Modem: -4 dB à +17 dB</li>
+  <li>Câble drop: -8 dBmV à +13 dBmV</li>
+  <li>Modem: -4 dBmV à +17 dBmV</li>
 </ul>
 
-<h3>TX-waarden</h3>
+<h3>TX</h3>
 <ul>
-  <li>Normal: 25 – 47 dB</li>
-  <li><strong>TX &lt; 25 dB → placer RPA 12</strong></li>
+  <li>Normal: 25 – 47 dBmV</li>
+  <li><strong>TX &lt; 25 dBmV → placer RPA 12</strong></li>
   <li>TX trop élevé possible à cause de tap, connecteurs ou câble drop</li>
   <li>Commencer la mesure sur RFin</li>
   <li>Remplacer préventivement le connecteur en cas de mauvais signal</li>
@@ -266,14 +266,14 @@ summary {
 </div>
 
 <div id="ofdm_fr">
-<h4>OFDM – Downstream signalen</h4>
+<h4>OFDM – Signaux Downstream</h4>
 <ul>
   <li>MER &gt; 34 dB</li>
   <li>Post BER ≥ 1E-7</li>
   <li>PLC, NCP doit avoir UCWE 0, sinon OFDM sera désactivé</li>
 </ul>
 
-<h4>OFDM-profielen (QAM)</h4>
+<h4>Profils OFDM (QAM)</h4>
 <ul>
   <li>Profil A: QAM 256</li>
   <li>Profil B: QAM 1024</li>
@@ -283,9 +283,9 @@ summary {
 </div>
 
 <div id="ofdma_fr">
-<h4>OFDMA – Upstream signalen</h4>
+<h4>OFDMA – Signaux Upstream</h4>
 <ul>
-  <li>TX: 25 – 47 dB (moyenne ± 34.8 dB)</li>
+  <li>TX: 25 – 47 dBmV (moyenne ± 34.8 dBmV)</li>
   <li>ICFR (Tilt OFDMA): &lt; 2 dB</li>
 </ul>
 
@@ -333,5 +333,6 @@ showLang('nl');
 
 </body>
 </html>
+
 
 
