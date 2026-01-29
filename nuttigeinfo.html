@@ -82,15 +82,45 @@ summary {
 <h1>Installatieprocedures & Signaalmetingen</h1>
 
 <details>
-<summary>Installatieprocedures</summary>
+<summary>Tijdsloten bij de klant</summary>
+<h3>Voormiddag</h3>
+<ul>
+<h4>08:00 – 11:00</h4>
+  <li>Klant mag <strong>NIET</strong> voor 8u opgestart worden</li>
+  <li>Klant <strong>MOET</strong> voor 12u opgestart worden</li>
+</ul>
 
+<h3>Middag</h3>
+<ul>
+<h4>11:00 – 14:00</h4>
+  <li>Klant mag <strong>NIET</strong> voor 10u opgestart worden</li>
+  <li>Klant <strong>MOET</strong> voor 15u opgestart worden</li>
+</ul>
+
+<h3>Namiddag</h3>
+<ul>
+<h4>14:00 – 18:00</h4>
+  <li>Klant mag <strong>NIET</strong> voor 13u opgestart worden</li>
+  <li>Klant <strong>MOET</strong> voor 18u opgestart worden</li>
+</ul>
+
+<h3>Avond</h3>
+<ul>
+<h4>18:00 – 20:00</h4>
+  <li>Klant mag <strong>NIET</strong> voor 17u opgestart worden</li>
+  <li>Klant <strong>MOET</strong> voor 20u opgestart worden</li>
+</ul>
+</details>
+
+<details>
+<summary>Installatieprocedures</summary>
 <h3>Boosters</h3>
 <ul>
   <li>Booster aansluiten op stroom.</li>
   <li>Bij voorkeur verbinden via UTP-kabel.</li>
   <li>WPS mogelijk maar afgeraden.</li>
   <li>LED moet groen branden.</li>
-  <li>RSSI controleren op de pagina 'Topologie' van de modem (&lt; -79 dBm = OK) + foto in rapport.</li>
+  <li>RSSI controleren op de pagina 'Topologie' van de modem (&lt; -75 dBm = OK) + foto in rapport.</li>
   <li>Speedtest uitvoeren via Companion app op locatie van de booster.</li>
 </ul>
 
@@ -127,7 +157,7 @@ summary {
 
 <h3>SNR / MER</h3>
 <ul>
-  <li>Moet &gt; 34 dB zijn.</li>
+  <li>MER moet &gt; 34 dB zijn.</li>
 </ul>
 
 <h3>BER</h3>
@@ -140,14 +170,8 @@ summary {
 <h3>OFDM / OFDMA</h3>
 <p>OFDM/OFDMA zijn extra kanalen die je kan krijgen door de DOCSIS 3.1 technologie. Let op: de Livebox zal altijd voorrang geven aan het OFDM/OFDMA kanaal. Als de signalen niet goed zijn, zal de klant problemen hebben.</p>
 
-<div class="tab-switch">
-  <button onclick="scrollToSection('ofdm')">OFDM</button>
-  <button onclick="scrollToSection('ofdma')">OFDMA</button>
-</div>
 
-<!-- OFDM -->
-<div id="ofdm">
-<h4>OFDM – Downstream signalen</h4>
+<h3>OFDM – Downstream signalen</h3>
 <ul>
   <li>MER &gt; 34 dB</li>
   <li>Post BER ≥ 1E-7</li>
@@ -161,11 +185,9 @@ summary {
   <li>Profiel C: QAM 2048</li>
   <li>Profiel D: QAM 4096</li>
 </ul>
-</div>
 
-<!-- OFDMA -->
-<div id="ofdma">
-<h4>OFDMA – Upstream signalen</h4>
+
+<h3>OFDMA – Upstream signalen</h3>
 <ul>
   <li>TX: 25 – 47 dBmV (gemiddeld ± 34.8 dBmV)</li>
   <li>ICFR (Tilt OFDMA): &lt; 2 dB</li>
@@ -185,7 +207,200 @@ summary {
   <li>12 → 64 QAM</li>
   <li>13 → 16 QAM</li>
 </ul>
+</details>
+
+
+<details>
+<summary>Ledstatus</summary>
+
+<h3>Livebox</h3>
+<p>Als het wolkje rood knippert is er altijd een probleem met het signaal.</p>
+
+<h4>Wolkje knippert traag rood.</h4>
+<ul>
+  <li>Er is een probleem met de downstream.</li>
+    <ul>
+      <li>RX signaal controleren.</li>
+      <li>Connectoren controleren.</li>
+    </ul>
+</ul>
+
+<h4>Wolkje knippert snel rood.</h4>
+<ul>
+  <li>Er is een probleem met de uptream.</li>
+    <ul>
+      <li>TX signaal controleren.</li>
+      <li>Connectoren controleren.</li>
+    </ul>
+</ul>
+
+<h4>Wolkje brandt vast rood.</h4>
+<ul>
+  <li>Er is een probleem met de activering.</li>
+    <ul>
+      <li>Controleer in WeCare of het MAC adres in orde is en de activering status.</li>
+      <li>Afmelden met functioning NO.</li>
+      <li>Provisioning bellen.</li>
+    </ul>
+</ul>
+
+<h4>Leds gaan groen van boven naar beneden(Waterval).</h4>
+<p>De modem doet dit ook tijdens zijn update. Wacht daarom altijd 15 minuten na de activatie in WeCare en controleer daarna.</p>
+
+<ul>
+  <li>Er is een probleem met de activering.</li>
+    <ul>
+      <li>Controleer in WeCare of het MAC adres in orde is en de activering status.</li>
+      <li>Afmelden met functioning NO.</li>
+      <li>Provisioning bellen.</li>
+    </ul>
+</ul>
+
+<ul>
+  <li>UTP kabels aangesloten?</li>
+    <ul>
+      <li>Controleer of er geen UTP lus is.</li>
+      <li>Trek alle UTP kabels uit.</li>
+    </ul>
+</ul>
+
+<h3>ATA Box</h3>
+<h4>Phone 1 brandt vast groen.</h4>
+
+<ul>
+  <li>Telefoon is ingehaakt, ATA is geregistreerd</li>
+</ul>
+
+<h4>Phone 1 knippert traag groen.</h4>
+<ul>
+  <li>telefoon is van de haak </li>
+</ul>
+
+<h4>Phone 1 brandt niet.</h4>
+<ul>
+  <li>Probleem met de activering</li>
+    <ul>
+      <li>Controleer in WeCare of het MAC adres in orde is en de activering status.</li>
+      <li>Bel provisioning.</li>
+    </ul>
+</ul>
+
+<h3>Modem 2</h3>
+<h4>DS blijft knipperen.</h4>
+<ul>
+  <li>Er is een probleem met de downstream.</li>
+    <ul>
+      <li>RX signaal controleren.</li>
+      <li>Connectoren controleren.</li>
+    </ul>
+</ul>
+
+<h4>US blijft knipperen.</h4>
+<ul>
+  <li>Er is een probleem met de uptream.</li>
+    <ul>
+      <li>TX signaal controleren.</li>
+      <li>Connectoren controleren.</li>
+    </ul>
+</ul>
+
+<h4>US & DS knipperen samen.</h4>
+<ul>
+  <li>Er is een probleem met de activering.</li>
+    <ul>
+      <li>Controleer in WeCare of het MAC adres in orde is en de activering status.</li>
+      <li>Afmelden met functioning NO.</li>
+      <li>Provisioning bellen.</li>
+    </ul>
+</ul>
+
+</details>
+
+<details>
+<summary>TDR</summary>
+<h3>TDR = Time Domain Reflectometer</h3>
+
+  <ul>
+    <li>Reflectometer die een kabelfout kan opsporen</li>
+  </ul>
+
+<h4>Wat is een TDR-meting?</h4>
+<ul>
+  <li>Puls met bepaalde grootte en breedte wordt over coax gestuurd</li>
+  <li>Kijken wanneer en hoe groot reflectie terugkomt</li>
+  <li>Bij event: Puls volledig of gedeeltelijk teruggekaatst</li>
+  <li>Grootte van en afstand tot dit event wordt weergegeven</li>
+</ul>
+
+<p><strong>Sluit de kabel steeds langs 1 kant af met een afsluitweerstand.</strong></p>
+<p><strong>Standaard hangt er een kabel van 5m aan de TDR, dus deze moet je er wel altijd aftrekken voor de correcte meters te weten.</strong></p>
+
+<ul>
+  <li><strong>Piek naar boven is een open lijn.</strong></li>
+    <ul>
+      <li>Kabel is onderbroken</li>
+      <li>Einde van de kabel</li>
+    </ul>
+</ul>
+
+<ul>
+  <li><strong>Piek naar beneden is een kortsluiting.</strong></li>
+    <ul>
+      <li>Massa en de kern van de kabel komen tegen elkaar</li>
+    </ul>
+</ul>
+<details>
+<summary>Voorbeelden TDR</summary>
+
+<p>Dropkabel van 5.2 m lengte. WEL afgesloten met 75 Ohm. Ingestelde impuls: 5 nS:</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/5.2-eind.jpg" 
+       alt="Dropkabel van 5.2 meter" 
+       style="max-width:90%; width:700px; height:auto;">
 </div>
+
+<p>Dropkabel van 5.2 m lengte (niet afgesloten met 75 Ohm). Let op de echo voorbij het gereflecteerde kabeleinde. Ingestelde impuls: 5 nS:</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/5.2-geeneind.jpg" 
+       alt="Dropkabel van 5,2 meter afgesloten" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>2 dropkabels van 5.2 m aan elkaar gezet met een junctie:</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/5.2-koppeling.png" 
+       alt="Twee dropkabels van 5,2 meter gekoppeld met junctie" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>10 meter dropkabel aangesloten op een NIU onder spanning:</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/niu.jpg" 
+       alt="10 meter dropkabel aangesloten op een NIU" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>30 meter dropkabel met kortsluiting. Let op de junctie op 10 meter.</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/30m-kortsluiting-10mkoppeling.jpg" 
+       alt="30 meter dropkabel met kortsluiting, junctie op 10 meter" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>10 meter dropkabel, dan splitter met 5 meter coax – niet afgesloten.</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/10m-splitter5m.jpg" 
+       alt="10 meter dropkabel met splitter en 5 meter coax" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>10 meter dropkabel, dan splitter met 5 meter coax op de ene aansluiting en 20 meter coax op de andere – beide niet afgesloten:</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/10m-splitter5-50m.png" 
+       alt="Voorbeeld van een dropkabel met splitter" 
+       style="max-width:90%; width:700px; height:auto;"
+</div>
+</details>
 
 </details>
 
@@ -202,8 +417,38 @@ summary {
 <h1>Procédures d’installation & Mesures de signal</h1>
 
 <details>
-<summary>Procédures d’installation</summary>
+<summary>Aperçu des créneaux horaires</summary>
+<h3>Matin</h3>
+<ul>
+<h4>08:00 – 11:00</h4>
+  <li>Le démarrage est <strong>interdit</strong> avant 08:00</li>
+  <li>Le démarrage <strong>doit</strong> avoir lieu avant 12:00</li>
+</ul>
 
+<h3>Midi</h3>
+<ul>
+<h4>11:00 – 14:00</h4>
+  <li>Le démarrage est <strong>interdit</strong> avant 10:00</li>
+  <li>Le démarrage <strong>doit</strong> avoir lieu avant 15:00</li>
+</ul>
+
+<h3>Apres midi</h3>
+<ul>
+<h4>14:00 – 18:00</h4>
+  <li>Le démarrage est <strong>interdit</strong> avant 13:00</li>
+  <li>Le démarrage <strong>doit</strong> avoir lieu avant 18:00</li>
+</ul>
+
+<h3>Soir</h3>
+<ul>
+<h4>18:00 – 20:00</h4>
+  <li>Le démarrage est <strong>interdit</strong> avant 17:00</li>
+  <li>Le démarrage <strong>doit</strong> avoir lieu avant 20:00</li>
+</ul>
+</details>
+
+<details>
+<summary>Procédures d’installation</summary>
 <h3>Boosters</h3>
 <ul>
   <li>Brancher le booster à l’alimentation.</li>
@@ -247,7 +492,7 @@ summary {
 
 <h3>SNR / MER</h3>
 <ul>
-  <li>&gt; 34 dB</li>
+  <li>MER &gt; 34 dB</li>
 </ul>
 
 <h3>BER</h3>
@@ -260,13 +505,7 @@ summary {
 <h3>OFDM / OFDMA</h3>
 <p>OFDM/OFDMA sont des canaux supplémentaires disponibles grâce à DOCSIS 3.1. La Livebox donnera toujours la priorité à ces canaux. Si les signaux ne sont pas corrects, le client rencontrera des problèmes.</p>
 
-<div class="tab-switch">
-  <button onclick="scrollToSection('ofdm_fr')">OFDM</button>
-  <button onclick="scrollToSection('ofdma_fr')">OFDMA</button>
-</div>
-
-<div id="ofdm_fr">
-<h4>OFDM – Signaux Downstream</h4>
+<h3>OFDM – Signaux Downstream</h3>
 <ul>
   <li>MER &gt; 34 dB</li>
   <li>Post BER ≥ 1E-7</li>
@@ -280,10 +519,9 @@ summary {
   <li>Profil C: QAM 2048</li>
   <li>Profil D: QAM 4096</li>
 </ul>
-</div>
 
-<div id="ofdma_fr">
-<h4>OFDMA – Signaux Upstream</h4>
+
+<h3>OFDMA – Signaux Upstream</h3>
 <ul>
   <li>TX: 25 – 47 dBmV (moyenne ± 34.8 dBmV)</li>
   <li>ICFR (Tilt OFDMA): &lt; 2 dB</li>
@@ -303,9 +541,201 @@ summary {
   <li>12 → 64 QAM</li>
   <li>13 → 16 QAM</li>
 </ul>
-</div>
+</details>
+
+<details>
+<summary>Statut des LED</summary>
+<h3>Livebox</h3>
+<p>Lorsque le petit nuage clignote en rouge, il y a toujours un problème de signal.</p>
+
+<h4>Le nuage clignote lentement en rouge.</h4>
+<ul>
+  <li>Il y a un problème avec le downstream.</li>
+    <ul>
+      <li>Vérifier le signal RX.</li>
+      <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>Le nuage clignote rapidement en rouge.</h4>
+<ul>
+  <li>Il y a un problème avec l’upstream.</li>
+    <ul>
+      <li>Vérifier le signal TX.</li>
+      <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>Le nuage reste allumé en rouge.</h4>
+<ul>
+  <li>Il y a un problème avec l’activation.</li>
+    <ul>
+      <li>Vérifier dans WeCare si l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Désactiver avec functioning NO.</li>
+      <li>Appeler le provisioning.</li>
+    </ul>
+</ul>
+
+<h4>Les LED deviennent vertes de haut en bas (Cascade).</h4>
+<p>Le modem fait également cela pendant sa mise à jour. Attendez donc toujours 15 minutes après l’activation dans WeCare et contrôlez ensuite.</p>
+
+<ul>
+  <li>Il y a un problème avec l’activation.</li>
+    <ul>
+      <li>Vérifier dans WeCare si l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Désactiver avec functioning NO.</li>
+      <li>Appeler le provisioning.</li>
+    </ul>
+</ul>
+
+<ul>
+  <li>Câbles UTP branchés ?</li>
+    <ul>
+      <li>Vérifier qu’il n’y a pas de boucle UTP.</li>
+      <li>Débrancher tous les câbles UTP.</li>
+    </ul>
+</ul>
+
+<h3>ATA Box</h3>
+<h4>Phone 1 reste allumé en vert.</h4>
+
+<ul>
+  <li>Le téléphone est raccroché, l’ATA est enregistré</li>
+</ul>
+
+<h4>Phone 1 clignotement vert lent</h4>
+<ul>
+  <li>Le téléphone est décroché </li>
+</ul>
+
+<h4>Phone 1 n’est pas allumé.</h4>
+<ul>
+  <li>Problème avec l’activation</li>
+    <ul>
+      <li>Vérifier dans WeCare si l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Appeler le provisioning.</li>
+    </ul>
+</ul>
+
+<h3>Modem 2</h3>
+<h4>DS reste clignotant.</h4>
+<ul>
+  <li>Il y a un problème avec le downstream.</li>
+    <ul>
+      <li>Vérifier le signal RX.</li>
+      <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>US reste clignotant.</h4>
+<ul>
+  <li>Il y a un problème avec l’upstream.</li>
+    <ul>
+      <li>Vérifier le signal TX.</li>
+      <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>US &amp; DS clignotent ensemble.</h4>
+<ul>
+  <li>Il y a un problème d’activation.</li>
+    <ul>
+      <li>Vérifier dans WeCare que l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Désactiver avec « functioning NO ».</li>
+      <li>Appeler le provisioning.</li>
+    </ul>
+</ul>
 
 </details>
+
+<details>
+<summary>TDR</summary>
+<h3>TDR = Time Domain Reflectometer</h3>
+
+  <ul>
+    <li>Réflectomètre capable de localiser un défaut de câble</li>
+  </ul>
+
+<h4>Qu’est-ce qu’une mesure TDR ?</h4>
+<ul>
+  <li>Impulsion de taille et largeur définie envoyée sur le coaxial</li>
+  <li>Observer quand et quelle est l’intensité de la réflexion qui revient</li>
+  <li>En cas d’événement : impulsion totalement ou partiellement réfléchie</li>
+  <li>La taille et la distance par rapport à cet événement sont affichées</li>
+</ul>
+
+<p><strong>Terminer toujours le câble d’un côté avec une résistance de terminaison.</strong></p>
+<p><strong>Par défaut, un câble de 5 m est connecté au TDR, donc il faut toujours le soustraire pour connaître les mètres exacts.</strong></p>
+
+<ul>
+  <li><strong>Pic vers le haut = ligne ouverte.</strong></li>
+    <ul>
+      <li>Câble interrompu</li>
+      <li>Extrémité du câble</li>
+    </ul>
+</ul>
+
+<ul>
+  <li><strong>Pic vers le bas = court-circuit.</strong></li>
+    <ul>
+      <li>Masse et âme du câble se touchent</li>
+    </ul>
+</ul>
+<details>
+<summary>Exemples TDR</summary>
+
+<p>Câble drop de 5,2 m. TERMINÉ avec 75 Ohm. Impulsion réglée : 5 nS :</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/5.2-eind.jpg" 
+       alt="Câble drop de 5,2 mètres" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>Câble drop de 5,2 m (non terminé avec 75 Ohm). Attention à l’écho après l’extrémité réfléchie du câble. Impulsion réglée : 5 nS :</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/5.2-geeneind.jpg" 
+       alt="Câble drop de 5,2 mètres non terminé" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>Deux câbles drop de 5,2 m connectés entre eux avec une jonction :</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/5.2-koppeling.png" 
+       alt="Deux câbles drop de 5,2 mètres connectés avec jonction" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>Câble drop de 10 m connecté à un NIU sous tension :</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/niu.jpg" 
+       alt="Câble drop de 10 mètres connecté à un NIU" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>Câble drop de 30 m avec court-circuit. Attention à la jonction à 10 mètres :</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/30m-kortsluiting-10mkoppeling.jpg" 
+       alt="Câble drop de 30 mètres avec court-circuit, jonction à 10 mètres" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>Câble drop de 10 m, puis splitter avec 5 mètres de coaxial – non terminé :</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/10m-splitter5m.jpg" 
+       alt="Câble drop de 10 mètres avec splitter et 5 mètres de coaxial" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+
+<p>Câble drop de 10 m, puis splitter avec 5 m de coax sur une sortie et 20 m sur l’autre – les deux non terminés :</p>
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/10m-splitter5-50m.png" 
+       alt="Exemple de câble drop avec splitter" 
+       style="max-width:90%; width:700px; height:auto;">
+</div>
+</details>
+
+</details>
+
 
 <div class="note">
   <p><strong>Dispatch:</strong> 03 610 10 79</p>
@@ -333,7 +763,3 @@ showLang('nl');
 
 </body>
 </html>
-
-
-
-
