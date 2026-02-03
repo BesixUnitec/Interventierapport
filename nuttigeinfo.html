@@ -673,6 +673,112 @@ summary {
 
 <details>
 <summary>Statut des LED</summary>
+
+<h3>Livebox</h3>
+<p>Lorsque le voyant en forme de nuage clignote en rouge, il y a toujours un problème de signal.</p>
+
+<h4>Le nuage clignote lentement en rouge.</h4>
+<ul>
+  <li>Il y a un problème avec le downstream.</li>
+    <ul>
+     <li>Vérifier le signal RX.</li>
+     <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>Le nuage clignote rapidement en rouge.</h4>
+<ul>
+  <li>Il y a un problème avec l’upstream.</li>
+    <ul>
+      <li>Vérifier le signal TX.</li>
+      <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>Le nuage est allumé en rouge fixe.</h4>
+<ul>
+  <li>Il y a un problème d’activation.</li>
+    <ul>
+      <li>Vérifier dans WeCare si l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Désinscrire avec « functioning NO ».</li>
+      <li>Contacter le provisioning.</li>
+    </ul>
+</ul>
+
+<h4>Les LED deviennent vertes de haut en bas (cascade).</h4>
+<p>Le modem effectue également cette opération lors de sa mise à jour. Attendez donc toujours 15 minutes après l’activation dans WeCare et vérifiez ensuite.</p>
+
+<ul>
+  <li>Il y a un problème d’activation.</li>
+    <ul>
+      <li>Vérifier dans WeCare si l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Désinscrire avec « functioning NO ».</li>
+      <li>Contacter le provisioning.</li>
+    </ul>
+</ul>
+
+<ul>
+  <li>Les câbles UTP sont-ils connectés ?</li>
+    <ul>
+      <li>Vérifier qu’il n’y a pas de boucle UTP.</li>
+      <li>Débrancher tous les câbles UTP.</li>
+    </ul>
+</ul>
+
+<h3>ATA Box</h3>
+<h4>Phone 1 est allumé en vert fixe.</h4>
+
+<ul>
+  <li>Le téléphone est raccroché, l’ATA est enregistré.</li>
+</ul>
+
+<h4>Phone 1 clignote lentement en vert.</h4>
+<ul>
+  <li>Le téléphone est décroché.</li>
+</ul>
+
+<h4>Phone 1 est éteint.</h4>
+<ul>
+  <li>Problème d’activation.</li>
+    <ul>
+      <li>Vérifier dans WeCare si l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Contacter le provisioning.</li>
+    </ul>
+</ul>
+
+<h3>Modem 2</h3>
+<h4>DS continue de clignoter.</h4>
+<ul>
+  <li>Il y a un problème avec le downstream.</li>
+    <ul>
+      <li>Vérifier le signal RX.</li>
+      <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>US continue de clignoter.</h4>
+<ul>
+  <li>Il y a un problème avec l’upstream.</li>
+    <ul>
+      <li>Vérifier le signal TX.</li>
+      <li>Vérifier les connecteurs.</li>
+    </ul>
+</ul>
+
+<h4>US & DS clignotent ensemble.</h4>
+<ul>
+  <li>Il y a un problème d’activation.</li>
+    <ul>
+      <li>Vérifier dans WeCare si l’adresse MAC est correcte et le statut d’activation.</li>
+      <li>Désinscrire avec « functioning NO ».</li>
+      <li>Contacter le provisioning.</li>
+    </ul>
+</ul>
+</details>
+
+
+<details>
+<summary>Statut des LED</summary>
 <h3>Livebox</h3>
 <p>Lorsque le petit nuage clignote en rouge, il y a toujours un problème de signal.</p>
 
@@ -993,13 +1099,6 @@ summary {
 </details>
 
 <div class="note">
-  <p><strong>Dispatch :</strong> 03 610 10 79</p>
-  <p><strong>Provisioning :</strong> 0800 85 032</p>
-</div>
-
-
-
-<div class="note">
   <p><strong>Dispatch:</strong> 03 610 10 79</p>
   <p><strong>Provisioning:</strong> 0800 85 032</p>
 </div>
@@ -1025,4 +1124,3 @@ showLang('nl');
 
 </body>
 </html>
-
