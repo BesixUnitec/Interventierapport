@@ -168,7 +168,7 @@ summary {
 
 <details>
 <summary>OFDM / OFDMA</summary>
-<p>OFDM/OFDMA zijn extra kanalen die je kan krijgen door de DOCSIS 3.1 technologie (Livebox). Let op: de Livebox zal altijd voorrang geven aan het OFDM/OFDMA kanaal. Als de signalen niet goed zijn, zal de klant problemen hebben.</p>
+<p>OFDM/OFDMA zijn extra kanalen die je kan krijgen door de DOCSIS 3.1 technologie. Let op: de Livebox zal altijd voorrang geven aan het OFDM/OFDMA kanaal. Als de signalen niet goed zijn, zal de klant problemen hebben.</p>
 
 
 <h3>OFDM – Downstream signalen</h3>
@@ -220,8 +220,8 @@ summary {
 <ul>
   <li>Er is een probleem met de downstream.</li>
     <ul>
-      <li>RX signaal controleren.</li>
-      <li>Connectoren controleren.</li>
+     <li>RX signaal controleren.</li>
+    <li>Connectoren controleren.</li>
     </ul>
 </ul>
 
@@ -313,7 +313,6 @@ summary {
       <li>Provisioning bellen.</li>
     </ul>
 </ul>
-
 </details>
 
 <details>
@@ -398,9 +397,138 @@ summary {
 <div style="text-align:center;">
   <img src="https://besixunitec.github.io/Interventierapport/10m-splitter5-50m.png" 
        alt="Voorbeeld van een dropkabel met splitter" 
-       style="max-width:90%; width:700px; height:auto;"
+       style="max-width:90%; width:700px; height:auto;">
+
 </div>
 </details>
+
+</details>
+
+<details>
+<summary>Filters</summary>
+
+<h3>Antidief</h3>
+<p>Een antidief filter zorgt ervoor dat alle signalen worden uitgefilterd.</p>
+
+<ul>
+  <li>Bedoeld om klanten af te sluiten van het net.</li>
+  <li>Dit filter zorgt ervoor dat een modem niet online komt en dat de klant geen tv kan ontvangen.</li>
+</ul>
+
+<p>Er zijn nog steeds oude filters aanwezig. Hieronder een foto waarop te zien is welke filters er zijn en welke sleutel je moet gebruiken.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/antidief+sleutel.png"
+       alt="Antidief filtersleutel"
+       style="max-width:90%; width:500px; height:auto;">
+</div>
+
+<h3>HPF filter</h3>
+<p>Een HP (High Pass) filter zorgt ervoor dat het upstream spectrum wordt uitgefilterd.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/HP.png"
+       alt="HP filter"
+       style="max-width:90%; width:200px; height:auto;">
+</div>
+
+<ul>
+  <li>Dit filter zorgt ervoor dat een modem niet online komt.</li>
+  <li>Wordt geplaatst wanneer er ingress op de kabel/installatie is.</li>
+  <li>Het HP filter moet altijd verwijderd worden, <strong>tenzij er een ingress-bandje aan hangt</strong>.</li>
+</ul>
+
+<h3>TOF / NOTCH filter</h3>
+<p>Dit filter moet je <strong>verplicht</strong> plaatsen wanneer de klant enkel een internetabonnement heeft. Het filter zorgt ervoor dat het tv-signaal wordt geblokkeerd.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/tof.png"
+       alt="TOF filter"
+       style="max-width:90%; width:300px; height:auto;">
+</div>
+
+<ul>
+  <li>Frequentieblok 263 – 317 MHz, 290 MHz zal dus geen signaal hebben.</li>
+</ul>
+
+<h3>RPA</h3>
+<p>Een RPA zorgt voor een verbetering van de upstream.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/rpa.png"
+       alt="RPA"
+       style="max-width:90%; width:300px; height:auto;">
+</div>
+
+<ul>
+  <li>Mag enkel geplaatst worden bij een <strong>TX &lt; 25</strong>. Het filter wordt geplaatst op een lage tapwaarde (4, 8, 11).</li>
+  <li>Standaard plaatsen we een RPA van 12 dB.</li>
+</ul>
+
+</details>
+
+<details>
+<summary>Veel voorkomende problemen</summary>
+
+<h3>Ik heb geen / slecht signaal op de dropkabel</h3>
+
+<ul>
+  <li><strong>Is de kabel aan de tap aangesloten?</strong>
+    <ul>
+      <li>Controleer of de kabel correct is aangesloten en of er geen filter aanwezig is.</li>
+    </ul>
+  </li>
+
+  <li><strong>Wat is het signaal aan de tap?</strong>
+    <ul>
+      <li>Meet het signaal aan de tap en controleer of er niet te veel verzwakking is op de dropkabel. 1 – 1,5 dBmV verlies per 10 m is normaal.</li>
+      <li>Vervang preventief de connectoren op de dropkabel en meet binnen opnieuw.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Ik heb geen internet</h3>
+
+<ul>
+  <li><strong>Wat is de LED-status van de modem?</strong>
+    <ul>
+      <li><strong>Rood knipperend</strong>: altijd een signaalprobleem (snel knipperen = US, traag knipperen = DS).</li>
+      <li><strong>Rood vast</strong>: probleem met de activatie. Controleer het MAC-adres en de status in WeCare.</li>
+      <li><strong>Vast groen maar geen internet</strong>: controleer het WAN-IP op de modempagina.
+        Dit moet starten met <strong>100.xxx</strong> (CGN IP) of <strong>94.xxx</strong> (public).</li>
+    </ul>
+  </li>
+
+  <li><strong>Zijn de signalen in orde?</strong>
+    <ul>
+      <li>Dropkabel: <strong>-8 tot +13</strong></li>
+      <li>Modemkabel: <strong>-4 tot +17</strong></li>
+      <li>TX: <strong>25 tot 47</strong></li>
+      <li>Controleer of alle connectoren correct geplaatst zijn.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Ik haal geen goede speedtest</h3>
+
+<p>Doe altijd een speedtest via de Companion app. DE VPN op de pc/tablet moet uitgeschakeld zijn om een correcte speedtest te behalen.</p>
+
+<ul>
+  <li><strong>Verbonden met de modem?</strong>
+    <ul>
+      <li>Test met een ander toestel. Indien het probleem op alle toestellen voorkomt, is er vermoedelijk een probleem met de modem of de signalen.</li>
+      <li>Controleer of je verbonden bent met de 5 GHz-band via de homepagina van de modem.</li>
+      <li>Is de modem ver verwijderd van de testlocatie? Dan is er vermoedelijk een booster nodig.</li>
+    </ul>
+  </li>
+
+  <li><strong>Verbonden met een booster?</strong>
+    <ul>
+      <li>Controleer of de booster correct gekoppeld is.</li>
+      <li>Controleer op de topologiepagina van de modem of de RSSI goed is.</li>
+    </ul>
+  </li>
+</ul>
 
 </details>
 
@@ -499,12 +627,11 @@ summary {
 <ul>
   <li>Post BER minimum 1E-7</li>
 </ul>
-</details>
 
+<hr>
 
-<details>
-<summary>OFDM / OFDMA</summary>
-<p>OFDM/OFDMA sont des canaux supplémentaires disponibles grâce à DOCSIS 3.1 (Livebox). La Livebox donnera toujours la priorité à ces canaux. Si les signaux ne sont pas corrects, le client rencontrera des problèmes.</p>
+<h3>OFDM / OFDMA</h3>
+<p>OFDM/OFDMA sont des canaux supplémentaires disponibles grâce à DOCSIS 3.1. La Livebox donnera toujours la priorité à ces canaux. Si les signaux ne sont pas corrects, le client rencontrera des problèmes.</p>
 
 <h3>OFDM – Signaux Downstream</h3>
 <ul>
@@ -736,6 +863,140 @@ summary {
 </details>
 
 </details>
+
+<details>
+<summary>Filtres</summary>
+
+<h3>Antivol</h3>
+<p>Un filtre antivol permet de filtrer tous les signaux.</p>
+
+<ul>
+  <li>Destiné à couper les clients du réseau.</li>
+  <li>Ce filtre empêche un modem de se connecter en ligne et empêche également le client de recevoir la télévision.</li>
+</ul>
+
+<p>Il existe encore d’anciens filtres. Ci-dessous, une photo montrant les différents filtres et la clé à utiliser.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/antidief+sleutel.png"
+       alt="Clé de filtre antivol"
+       style="max-width:90%; width:500px; height:auto;">
+</div>
+
+<h3>Filtre HPF</h3>
+<p>Un filtre HP (High Pass) permet de filtrer le spectre upstream.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/HP.png"
+       alt="Filtre HP"
+       style="max-width:90%; width:200px; height:auto;">
+</div>
+
+<ul>
+  <li>Ce filtre empêche un modem de se connecter en ligne.</li>
+  <li>Il est placé lorsqu’il y a de l’ingress sur le câble/l’installation.</li>
+  <li>Le filtre HP doit toujours être retiré, <strong>sauf s’il y a un ruban d’ingress attaché</strong>.</li>
+</ul>
+
+<h3>Filtre TOF / NOTCH</h3>
+<p>Ce filtre doit être placé de manière <strong>obligatoire</strong> lorsque le client dispose uniquement d’un abonnement internet. Le filtre bloque le signal TV.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/tof.png"
+       alt="Filtre TOF"
+       style="max-width:90%; width:300px; height:auto;">
+</div>
+
+<ul>
+  <li>Bande de fréquences 263 – 317 MHz, 290 MHz n’aura donc aucun signal.</li>
+</ul>
+
+<h3>RPA</h3>
+<p>Un RPA permet une amélioration de l’upstream.</p>
+
+<div style="text-align:center;">
+  <img src="https://besixunitec.github.io/Interventierapport/rpa.png"
+       alt="RPA"
+       style="max-width:90%; width:300px; height:auto;">
+</div>
+
+<ul>
+  <li>Peut uniquement être placé avec un <strong>TX &lt; 25</strong>. Le filtre est placé sur une valeur de tap faible (4, 8, 11).</li>
+  <li>Par défaut, nous plaçons un RPA de 12 dB.</li>
+</ul>
+
+</details>
+
+<details>
+<summary>Problèmes fréquents</summary>
+
+<h3>Je n’ai pas / j’ai un mauvais signal sur le câble drop</h3>
+
+<ul>
+  <li><strong>Le câble est-il raccordé au tap ?</strong>
+    <ul>
+      <li>Vérifiez si le câble est correctement raccordé et s’il n’y a pas de filtre présent.</li>
+    </ul>
+  </li>
+
+  <li><strong>Quel est le signal au tap ?</strong>
+    <ul>
+      <li>Mesurez le signal au tap et vérifiez qu’il n’y a pas trop d’atténuation sur le câble drop. Une perte de 1 – 1,5 dBmV par 10 m est normale.</li>
+      <li>Remplacez préventivement les connecteurs du câble drop et mesurez à nouveau à l’intérieur.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Je n’ai pas d’internet</h3>
+
+<ul>
+  <li><strong>Quel est le statut LED du modem ?</strong>
+    <ul>
+      <li><strong>Clignotement rouge</strong> : toujours un problème de signal (clignotement rapide = US, clignotement lent = DS).</li>
+      <li><strong>Rouge fixe</strong> : problème d’activation. Vérifiez l’adresse MAC et le statut dans WeCare.</li>
+      <li><strong>Vert fixe mais pas d’internet</strong> : vérifiez l’IP WAN sur la page du modem.
+        Celle-ci doit commencer par <strong>100.xxx</strong> (IP CGN) ou <strong>94.xxx</strong> (publique).</li>
+    </ul>
+  </li>
+
+  <li><strong>Les signaux sont-ils corrects ?</strong>
+    <ul>
+      <li>Câble drop : <strong>-8 à +13</strong></li>
+      <li>Câble modem : <strong>-4 à +17</strong></li>
+      <li>TX : <strong>25 à 47</strong></li>
+      <li>Vérifiez que tous les connecteurs sont correctement placés.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Je n’obtiens pas un bon speedtest</h3>
+
+<p>Effectuez toujours un speedtest via l’application Companion. LE VPN sur le PC/la tablette doit être désactivé afin d’obtenir un speedtest correct.</p>
+
+<ul>
+  <li><strong>Connecté au modem ?</strong>
+    <ul>
+      <li>Testez avec un autre appareil. Si le problème se produit sur tous les appareils, il s’agit probablement d’un problème du modem ou des signaux.</li>
+      <li>Vérifiez si vous êtes connecté à la bande 5 GHz via la page d’accueil du modem.</li>
+      <li>Le modem est-il éloigné de l’emplacement du test ? Un booster est alors probablement nécessaire.</li>
+    </ul>
+  </li>
+
+  <li><strong>Connecté à un booster ?</strong>
+    <ul>
+      <li>Vérifiez si le booster est correctement couplé.</li>
+      <li>Vérifiez sur la page topologie du modem si le RSSI est correct.</li>
+    </ul>
+  </li>
+</ul>
+
+</details>
+
+<div class="note">
+  <p><strong>Dispatch :</strong> 03 610 10 79</p>
+  <p><strong>Provisioning :</strong> 0800 85 032</p>
+</div>
+
 
 
 <div class="note">
