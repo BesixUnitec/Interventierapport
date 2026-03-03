@@ -483,11 +483,17 @@ async function copyOutput(){
 </script>
 <div class="bottom-buttons">
   <button type="button" onclick="openInstallHelp()">
-    Installatie checklist Installation
+    Installatie checklist / Installation
   </button>
   <button type="button" onclick="openUsefulInfo()">
     Nuttige info
   </button>
+
+
+<button type="button" onclick="openLanguageForm()">
+    Offerte / Devis
+</button>
+
 </div>
 
 <script>
@@ -505,7 +511,24 @@ function openUsefulInfo(){
   );
 }
 </script>
+
+
+<script>
+function openLanguageForm(){
+  const lang = document.querySelector('input[name="language"]:checked')?.value;
+
+  if(!lang){
+    alert("Kies eerst een taal / Choisissez d'abord une langue");
+    return;
+  }
+
+  if(lang === "nl"){
+    window.open("https://forms.gle/QAiNNHz9ouTWJku38", "_blank");
+  } else {
+    window.open("https://forms.gle/5mPCu5NZmeRoUG1v8", "_blank");
+  }
+}
+</script>
+
 </body>
 </html>
-
-
