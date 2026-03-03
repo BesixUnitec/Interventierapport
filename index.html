@@ -200,6 +200,111 @@ fieldset.survey-block legend { font-weight: bold; }
   background: #e06a00;
 }
 
+/* --- Sync Popup (vrijdag) --- */
+.sync-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: none; /* default: verborgen */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.sync-modal {
+  background: #fff;
+  width: min(520px, 92vw);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-top: 6px solid var(--brand);
+  padding: 22px 20px 16px;
+  position: relative;
+  animation: modal-pop .18s ease-out;
+}
+
+@keyframes modal-pop {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+.sync-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.sync-modal-header .brand-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--brand);
+  flex-shrink: 0;
+}
+
+.sync-modal-title {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sync-modal-body {
+  color: #444;
+  line-height: 1.5;
+  margin-top: 6px;
+  white-space: pre-line; /* laat \n netjes afspringen */
+}
+
+.sync-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.sync-modal .btn-primary {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.sync-modal .btn-primary:hover {
+  background: #e06a00;
+}
+
+.sync-modal .btn-secondary {
+  background: #f5f6f7;
+  color: #333;
+  border: 1px solid #e2e2e2;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Close (X) knop */
+.sync-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 20px;
+  line-height: 20px;
+  color: #999;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.sync-modal-close:hover {
+  color: #555;
+}
+``
+
 </style>
 </head>
 <body>
@@ -530,6 +635,165 @@ function openLanguageForm(){
 }
 </script>
 
+<!-- Vrijdag Sync Popup -->
+<div id="sync-backdrop" class="sync-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="sync-title">
+  <div class="sync-modal">
+    <button class="sync-modal-close" id="sync-close" aria-label="Sluiten / Fermer">&times;</button>
+
+    <div class="sync-modal-header">
+      <div class="brand-dot"></div>
+      <h3 class="sync-modal-title" id="sync-title">
+        Reminder / Rappel
+      </h3>
+    </div>
+
+    <div class="sync-modal-body" id="sync-message">
+      <!-- Dynamisch ingevuld via JS (NL of FR, of beide) -->
+    </div>
+
+    <div class="sync-modal-actions">
+      <button class="btn-secondary" id="sync-later">
+        Later
+      </button>
+      <button class="btn-primary" id="sync-ok">
+        Oké / D’accord
+      </button>
+    </div>
+  </div>
+</div>
+``
+
+<script>
+
+(function initFridaySyncPopup(){
+  const backdrop   = document.getElementById('sync-backdrop');
+  const msgEl      = document.getElementById('sync-message');
+  const btnClose   = document.getElementById('sync-close');
+  const btnLater   = document.getElementById('sync-later');
+  const btnOk      = document.getElementById('sync-ok');
+
+  if(!backdrop || !msgEl) return; // veiligheid
+
+  function todayKey(date = new Date()) {
+    // key per vrijdag (YYYY-MM-DD)
+    const y = date.getFullYear();
+    const m = String(date.getMonth()+1).padStart(2,'0');
+    const d = String(date.getDate()).padStart(2,'0');
+    return `${y}-${m}-${d}`;
+  }
+
+  function isFriday(date = new Date()){
+    // getDay(): 0=zo, 1=ma, ..., 5=vrij, 6=zat
+    return date.getDay() === 5;
+  }
+
+  function getSelectedLang(){
+    return document.querySelector('input[name="language"]:checked')?.value; // 'nl' | 'fr' | undefined
+  }
+
+  function buildMessage() {
+    const nl = "Gelieve jullie metingen te synchroniseren met de server.";
+    const fr = "Veuillez synchroniser vos mesures avec le serveur.";
+    const lang = getSelectedLang();
+
+    if (lang === 'nl') return nl;
+    if (lang === 'fr') return fr;
+
+    // Geen taal gekozen? Toon beide (NL boven, FR eronder)
+    return nl + "\n\n" + fr;
+  }
+
+  function showPopup(){
+    msgEl.textContent = buildMessage();
+    backdrop.style.display = 'flex';
+
+    // Sluiten: X, Later, Oké, klik buiten, en ESC
+    function close(){
+      backdrop.style.display = 'none';
+      detach();
+    }
+
+    function confirmAndClose(){
+      // Je kan hier optioneel een actie triggen (bv. open pagina of API) – nu enkel sluiten.
+      close();
+    }
+
+    function onBackdropClick(e){
+      if (e.target === backdrop) close();
+    }
+
+    function onEsc(e){ if (e.key === 'Escape') close(); }
+
+    function detach(){
+      btnClose.removeEventListener('click', close);
+      btnLater.removeEventListener('click', close);
+      btnOk.removeEventListener('click', confirmAndClose);
+      backdrop.removeEventListener('click', onBackdropClick);
+      document.removeEventListener('keydown', onEsc);
+    }
+
+    btnClose.addEventListener('click', close);
+    btnLater.addEventListener('click', close);
+    btnOk.addEventListener('click', confirmAndClose);
+    backdrop.addEventListener('click', onBackdropClick);
+    document.addEventListener('keydown', onEsc);
+  }
+
+  function alreadyShownFor(dateKey){
+    return localStorage.getItem('syncPopupShown-' + dateKey) === '1';
+  }
+
+  function markShown(dateKey){
+    localStorage.setItem('syncPopupShown-' + dateKey, '1');
+  }
+
+  function shouldForce(){
+    // test via query parameter ?forceSyncPopup=1
+    const params = new URLSearchParams(window.location.search);
+    return params.get('forceSyncPopup') === '1';
+  }
+
+  function run(){
+    const now = new Date();
+    const key = todayKey(now);
+
+    if (shouldForce()) {
+      showPopup();
+      // In testmodus markeren we hem niet automatisch als 'getoond',
+      // zodat je meerdere keren kunt testen door te refreshen.
+      return;
+    }
+
+    if (isFriday(now) && !alreadyShownFor(key)) {
+      showPopup();
+      markShown(key);
+    }
+  }
+
+  // Exporteer kleine helper om manueel te forceren vanuit console of testknop
+  window.__forceSyncPopup = function(){
+    // Verwijder markering zodat hij opnieuw getoond kan worden
+    const key = todayKey(new Date());
+    localStorage.removeItem('syncPopupShown-' + key);
+    const url = new URL(window.location.href);
+    url.searchParams.set('forceSyncPopup', '1');
+    window.location.href = url.toString();
+  };
+
+  // Update bericht live als taal wijzigt terwijl popup open is
+  const langRadios = document.querySelectorAll('input[name="language"]');
+  langRadios.forEach(r => {
+    r.addEventListener('change', () => {
+      if (backdrop.style.display === 'flex') {
+        msgEl.textContent = buildMessage();
+      }
+    });
+  });
+
+  // Start
+  run();
+})();
+</script>
+
 </body>
 </html>
-
