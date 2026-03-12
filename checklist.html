@@ -290,6 +290,18 @@ function showLang(lang){
 showLang('nl');
 </script>
 
+<div id="footer-container"></div>
+
+<script>
+fetch('footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML = html;
+  })
+  .catch(err => console.error('Footer laden mislukt:', err));
+</script>
+  
 </body>
 
 </html>
+
