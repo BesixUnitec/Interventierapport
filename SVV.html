@@ -1,0 +1,1533 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site Survey - Technician Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #000000;
+            border-bottom: 3px solid #FF6600;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+
+        .top-bar h1 {
+            color: #FF6600;
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Language switcher buttons in top bar */
+        .lang-switcher {
+            display: flex;
+            gap: 6px;
+        }
+
+        .lang-btn {
+            padding: 5px 12px;
+            border: 2px solid #FF6600;
+            border-radius: 4px;
+            background-color: transparent;
+            color: #FF6600;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background-color: #FF6600;
+            color: #FFFFFF;
+        }
+
+        .lang-btn.active {
+            background-color: #FF6600;
+            color: #FFFFFF;
+        }
+
+        .top-bar img {
+            height: 50px;
+            width: auto;
+        }
+
+        h2 { color: #FF6600; margin-top: 0; }
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        /* LEFT COLUMN */
+        .form {
+            width: 55%;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #D6D6D6;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            box-sizing: border-box;
+        }
+
+        .section-block {
+            background-color: #FAFAFA;
+            border: 1px solid #D6D6D6;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #FF6600;
+            margin-bottom: 10px;
+            display: block;
+            border-bottom: 2px solid #FF6600;
+            padding-bottom: 4px;
+        }
+
+        .question-row {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-left: 3px solid #FF6600;
+            background-color: #FFF8F3;
+            border-radius: 0 4px 4px 0;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .question-row.always {
+            display: block;
+            border-left: 3px solid #D6D6D6;
+            background-color: #F5F5F5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-row label {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            color: #000000;
+            margin-bottom: 6px;
+        }
+
+        .question-number { color: #FF6600; font-weight: bold; }
+
+        .conditional-badge {
+            display: inline-block;
+            font-size: 10px;
+            background-color: #FF6600;
+            color: white;
+            padding: 1px 6px;
+            border-radius: 10px;
+            margin-left: 6px;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+
+        .form select,
+        .form input[type="text"],
+        .form input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #D6D6D6;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        .form select:focus,
+        .form input[type="text"]:focus,
+        .form input[type="number"]:focus {
+            outline: none;
+            border-color: #FF6600;
+        }
+
+        .form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #D6D6D6;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        .form textarea::placeholder { color: #8F8F8F; font-style: italic; }
+        .form textarea:focus { outline: none; border-color: #FF6600; }
+
+        .signal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .signal-grid label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #595959;
+            margin-bottom: 2px;
+        }
+
+        .signal-grid input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #D6D6D6;
+            border-radius: 4px;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-copy {
+            flex: 1;
+            padding: 10px;
+            background-color: #FF6600;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-copy:hover { background-color: #cc5200; }
+
+        .btn-clear {
+            flex: 1;
+            padding: 10px;
+            background-color: #595959;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-clear:hover { background-color: #333333; }
+
+        #copyMessage {
+            display: none;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #FFF3E0;
+            color: #FF6600;
+            border: 1px solid #FF6600;
+            border-radius: 4px;
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* RIGHT COLUMN sticky */
+        .reminder-column {
+            width: 42%;
+            box-sizing: border-box;
+            position: sticky;
+            top: 10px;
+            max-height: 95vh;
+            overflow-y: auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #D6D6D6;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            font-size: 13px;
+            color: #000000;
+            scroll-behavior: smooth;
+        }
+
+        .reminder-column h2 { color: #FF6600; margin-top: 0; }
+
+        .reminder-section {
+            margin-bottom: 18px;
+            padding: 12px;
+            border-left: 4px solid #FF6600;
+            background-color: #F5F5F5;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .reminder-section h3 { margin: 0 0 6px 0; color: #FF6600; font-size: 14px; }
+
+        .reminder-section ul { margin: 4px 0 0 0; padding-left: 18px; }
+
+        .reminder-section ul li {
+            margin-bottom: 4px;
+            line-height: 1.5;
+            color: #595959;
+        }
+
+        .reminder-section ul li strong { color: #FF6600; }
+
+        .reminder-column::-webkit-scrollbar { width: 6px; }
+        .reminder-column::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .reminder-column::-webkit-scrollbar-thumb { background: #FF6600; border-radius: 4px; }
+
+        /* POPUPS */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-overlay.active { display: flex; }
+
+        .popup-box {
+            background-color: #FFFFFF;
+            border-top: 4px solid #FF6600;
+            border-radius: 8px;
+            padding: 24px 28px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .popup-box .popup-icon { font-size: 36px; margin-bottom: 10px; }
+
+        .popup-box p {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .popup-box button {
+            padding: 10px 24px;
+            background-color: #FF6600;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .popup-box button:hover { background-color: #cc5200; }
+
+        /* LANGUAGE SELECTION POPUP */
+        .lang-popup-overlay {
+            display: flex;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lang-popup-box {
+            background-color: #FFFFFF;
+            border-top: 4px solid #FF6600;
+            border-radius: 8px;
+            padding: 32px 36px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .lang-popup-box img {
+            height: 50px;
+            margin-bottom: 16px;
+        }
+
+        .lang-popup-box h2 {
+            color: #FF6600;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .lang-popup-box p {
+            color: #595959;
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .lang-choice-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .lang-choice-btn {
+            padding: 12px 20px;
+            border: 2px solid #FF6600;
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            color: #FF6600;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 90px;
+        }
+
+        .lang-choice-btn:hover {
+            background-color: #FF6600;
+            color: #FFFFFF;
+        }
+
+        .lang-flag { font-size: 22px; display: block; margin-bottom: 4px; }
+
+        .free-text-area { display: none; margin-top: 8px; }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            color: #8F8F8F;
+            font-size: 12px;
+            border-top: 1px solid #D6D6D6;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ======================== -->
+<!-- LANGUAGE SELECTION POPUP -->
+<!-- ======================== -->
+<div class="lang-popup-overlay" id="langPopup">
+    <div class="lang-popup-box">
+        <img src="orange_logo.png" alt="Orange Logo">
+        <h2>Site Survey – Technician Form</h2>
+        <p id="langPopupSubtitle">Please choose your language / Kies uw taal / Choisissez votre langue</p>
+        <div class="lang-choice-buttons">
+            <button class="lang-choice-btn" onclick="selectLanguage('nl')">
+                <span class="lang-flag">🇧🇪</span> Nederlands
+            </button>
+            <button class="lang-choice-btn" onclick="selectLanguage('fr')">
+                <span class="lang-flag">🇧🇪</span> Français
+            </button>
+            <button class="lang-choice-btn" onclick="selectLanguage('en')">
+                <span class="lang-flag">🇬🇧</span> English
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- WARNING POPUP - Foto's niet genomen -->
+<div class="popup-overlay" id="popup_fotos">
+    <div class="popup-box">
+        <div class="popup-icon">⚠️</div>
+        <p id="popup_fotos_text"></p>
+        <button onclick="closePopup('popup_fotos')" id="popup_fotos_btn"></button>
+    </div>
+</div>
+
+<!-- WARNING POPUP - Traject niet aangeduid -->
+<div class="popup-overlay" id="popup_traject">
+    <div class="popup-box">
+        <div class="popup-icon">⚠️</div>
+        <p id="popup_traject_text"></p>
+        <button onclick="closePopup('popup_traject')" id="popup_traject_btn"></button>
+    </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <h1 id="topBarTitle">🔧 Site Survey – Technician Report</h1>
+    <div class="top-bar-right">
+        <div class="lang-switcher">
+            <button class="lang-btn" id="btn_nl" onclick="selectLanguage('nl')">🇧🇪 NL</button>
+            <button class="lang-btn" id="btn_fr" onclick="selectLanguage('fr')">🇧🇪 FR</button>
+            <button class="lang-btn" id="btn_en" onclick="selectLanguage('en')">🇬🇧 EN</button>
+        </div>
+        <img src="orange_logo.png" alt="Orange Logo">
+    </div>
+</div>
+
+<div class="form-container">
+
+    <!-- LEFT COLUMN -->
+    <div class="form">
+        <h2 id="formTitle">Technician Form</h2>
+        <form id="myForm">
+
+            <!-- SECTION 1 -->
+            <div class="section-block">
+                <span class="section-title" id="s1_title">1. Aansluitbaarheid</span>
+
+                <div class="question-row always">
+                    <label>
+                        <span class="question-number">1.1</span>
+                        <span id="q1_1_label">Is de klant aansluitbaar?</span>
+                    </label>
+                    <select id="q1_1" onchange="handle_1_1()">
+                        <option value="" id="q1_1_opt0">-- Selecteer --</option>
+                        <option value="Ja" id="q1_1_opt1">Ja</option>
+                        <option value="Nee" id="q1_1_opt2">Nee</option>
+                    </select>
+                </div>
+
+                <div class="question-row" id="row_1_2">
+                    <label>
+                        <span class="question-number">1.2</span>
+                        <span id="q1_2_label">Wat is het probleem?</span>
+                        <span class="conditional-badge" id="badge_nee_1">Enkel bij Nee</span>
+                    </label>
+                    <select id="q1_2" onchange="handle_1_2()">
+                        <option value="" id="q1_2_opt0">-- Selecteer probleem --</option>
+                        <option value="Dropcable" id="q1_2_opt1">Dropcable</option>
+                        <option value="Tap" id="q1_2_opt2">Tap</option>
+                        <option value="Interne bekabeling" id="q1_2_opt3">Interne bekabeling</option>
+                        <option value="Andere" id="q1_2_opt4">Andere</option>
+                    </select>
+                </div>
+
+                <div class="question-row" id="row_1_3">
+                    <label>
+                        <span class="question-number">1.3</span>
+                        <span id="q1_3_label">Leg het probleem uit in detail:</span>
+                        <span class="conditional-badge" id="badge_andere_1">Enkel bij Andere</span>
+                    </label>
+                    <textarea id="q1_3" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="section-block">
+                <span class="section-title" id="s2_title">2. Dropwerken</span>
+
+                <div class="question-row always">
+                    <label>
+                        <span class="question-number">2.1</span>
+                        <span id="q2_1_label">Zijn dropwerken nodig?</span>
+                    </label>
+                    <select id="q2_1" onchange="handle_2_1()">
+                        <option value="" id="q2_1_opt0">-- Selecteer --</option>
+                        <option value="Ja" id="q2_1_opt1">Ja</option>
+                        <option value="Nee" id="q2_1_opt2">Nee</option>
+                    </select>
+                </div>
+
+                <div class="question-row" id="row_2_2">
+                    <label>
+                        <span class="question-number">2.2</span>
+                        <span id="q2_2_label">Noteer de signalen op de dropkabel:</span>
+                        <span class="conditional-badge" id="badge_nee_2">Enkel bij Nee</span>
+                    </label>
+                    <div class="signal-grid">
+                        <div>
+                            <label id="q2_2_1_label">2.2.1 Downstream dBmV</label>
+                            <input type="text" id="q2_2_1" placeholder="bv. -3">
+                        </div>
+                        <div>
+                            <label id="q2_2_2_label">2.2.2 Upstream dBmV</label>
+                            <input type="text" id="q2_2_2" placeholder="bv. +5">
+                        </div>
+                        <div>
+                            <label id="q2_2_3_label">2.2.3 SNR</label>
+                            <input type="text" id="q2_2_3" placeholder="bv. 38">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-row" id="row_2_3">
+                    <label>
+                        <span class="question-number">2.3</span>
+                        <span id="q2_3_label">Hoeveel meter dropkabel is nodig?</span>
+                        <span class="conditional-badge" id="badge_ja_2">Enkel bij Ja</span>
+                    </label>
+                    <input type="number" id="q2_3" placeholder="Aantal meter (bv. 25)">
+                </div>
+
+                <div class="question-row" id="row_2_4">
+                    <label>
+                        <span class="question-number">2.4</span>
+                        <span id="q2_4_label">Type werk?</span>
+                        <span class="conditional-badge" id="badge_ja_2b">Enkel bij Ja</span>
+                    </label>
+                    <select id="q2_4">
+                        <option value="" id="q2_4_opt0">-- Selecteer type --</option>
+                        <option value="Simple" id="q2_4_opt1">Simple</option>
+                        <option value="Complex" id="q2_4_opt2">Complex</option>
+                        <option value="Offerte nodig" id="q2_4_opt3">Offerte nodig</option>
+                    </select>
+                </div>
+
+                <div class="question-row" id="row_2_5">
+                    <label>
+                        <span class="question-number">2.5</span>
+                        <span id="q2_5_label">Waar komt de dropkabel binnen?</span>
+                    </label>
+                    <textarea id="q2_5" rows="2"></textarea>
+                </div>
+
+                <div class="question-row" id="row_2_5_1">
+                    <label>
+                        <span class="question-number">2.5.1</span>
+                        <span id="q2_5_1_label">Foto's genomen van traject TAP → Modem?</span>
+                    </label>
+                    <select id="q2_5_1" onchange="handle_2_5_1()">
+                        <option value="" id="q2_5_1_opt0">-- Selecteer --</option>
+                        <option value="Ja" id="q2_5_1_opt1">Ja</option>
+                        <option value="Nee" id="q2_5_1_opt2">Nee</option>
+                        <option value="NVT" id="q2_5_1_opt3">Niet van toepassing</option>
+                    </select>
+                    <div class="free-text-area" id="free_2_5_1">
+                        <textarea id="q2_5_1_text" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="question-row" id="row_2_5_2">
+                    <label>
+                        <span class="question-number">2.5.2</span>
+                        <span id="q2_5_2_label">Traject aangeduid op de foto's?</span>
+                    </label>
+                    <select id="q2_5_2" onchange="handle_2_5_2()">
+                        <option value="" id="q2_5_2_opt0">-- Selecteer --</option>
+                        <option value="Ja" id="q2_5_2_opt1">Ja</option>
+                        <option value="Nee" id="q2_5_2_opt2">Nee</option>
+                        <option value="NVT" id="q2_5_2_opt3">Niet van toepassing</option>
+                    </select>
+                    <div class="free-text-area" id="free_2_5_2">
+                        <textarea id="q2_5_2_text" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3 -->
+            <div class="section-block">
+                <span class="section-title" id="s3_title">3. Tap</span>
+
+                <div class="question-row always">
+                    <label>
+                        <span class="question-number">3.1</span>
+                        <span id="q3_1_label">Is er een tap aanwezig?</span>
+                    </label>
+                    <select id="q3_1" onchange="handle_3_1()">
+                        <option value="" id="q3_1_opt0">-- Selecteer --</option>
+                        <option value="Ja" id="q3_1_opt1">Ja</option>
+                        <option value="Nee" id="q3_1_opt2">Nee</option>
+                    </select>
+                </div>
+
+                <div class="question-row" id="row_3_2">
+                    <label>
+                        <span class="question-number">3.2</span>
+                        <span id="q3_2_label">Locatie van de tap:</span>
+                        <span class="conditional-badge" id="badge_ja_3">Enkel bij Ja</span>
+                    </label>
+                    <input type="text" id="q3_2">
+                </div>
+
+                <div class="question-row" id="row_3_3">
+                    <label>
+                        <span class="question-number">3.3</span>
+                        <span id="q3_3_label">Type tap?</span>
+                        <span class="conditional-badge" id="badge_ja_3b">Enkel bij Ja</span>
+                    </label>
+                    <select id="q3_3">
+                        <option value="" id="q3_3_opt0">-- Selecteer type --</option>
+                        <option value="Façade" id="q3_3_opt1">Façade</option>
+                        <option value="Ondergronds" id="q3_3_opt2">Ondergronds</option>
+                        <option value="Paal" id="q3_3_opt3">Paal</option>
+                        <option value="Interne ruimte" id="q3_3_opt4">Interne ruimte</option>
+                    </select>
+                </div>
+
+                <div class="question-row" id="row_3_4">
+                    <label>
+                        <span class="question-number">3.4</span>
+                        <span id="q3_4_label">Signaal op de tap?</span>
+                        <span class="conditional-badge" id="badge_ja_3c">Enkel bij Ja</span>
+                    </label>
+                    <select id="q3_4">
+                        <option value="" id="q3_4_opt0">-- Selecteer --</option>
+                        <option value="OK">OK</option>
+                        <option value="NOK">NOK</option>
+                    </select>
+                </div>
+
+                <div class="question-row" id="row_3_5">
+                    <label>
+                        <span class="question-number">3.5</span>
+                        <span id="q3_5_label">Effectieve signaalwaarden op de tap:</span>
+                        <span class="conditional-badge" id="badge_ja_3d">Enkel bij Ja</span>
+                    </label>
+                    <div class="signal-grid">
+                        <div>
+                            <label id="q3_5_1_label">3.5.1 Downstream dBmV</label>
+                            <input type="text" id="q3_5_1" placeholder="bv. -3">
+                        </div>
+                        <div>
+                            <label id="q3_5_2_label">3.5.2 Upstream dBmV</label>
+                            <input type="text" id="q3_5_2" placeholder="bv. +5">
+                        </div>
+                        <div>
+                            <label id="q3_5_3_label">3.5.3 SNR</label>
+                            <input type="text" id="q3_5_3" placeholder="bv. 38">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4 -->
+            <div class="section-block">
+                <span class="section-title" id="s4_title">4. Bijkomende info & vaststellingen</span>
+                <div class="question-row always">
+                    <label>
+                        <span class="question-number">4.1</span>
+                        <span id="q4_1_label">Noteer alle info die de volgende technieker nodig zal hebben:</span>
+                    </label>
+                    <textarea id="q4_1" rows="5"></textarea>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="button-row">
+            <button class="btn-copy" onclick="copyToClipboard()" id="btn_copy">📋 Kopieer naar klembord</button>
+            <button class="btn-clear" onclick="clearForm()" id="btn_clear">🗑️ Formulier wissen</button>
+        </div>
+        <div id="copyMessage"></div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="reminder-column">
+        <h2 id="reminder_title">📋 Richtlijnen – Wat invullen?</h2>
+
+        <div class="reminder-section">
+            <h3 id="r1_title">1. Aansluitbaarheid</h3>
+            <ul id="r1_list">
+                <li><strong>1.1</strong> Is de klant aansluitbaar? <strong>Ja / Nee</strong></li>
+                <li><strong>1.2</strong> (Enkel bij Nee) Wat is het probleem?<br>→ <strong>Dropcable / Tap / Interne bekabeling / Andere</strong></li>
+                <li><strong>1.3</strong> (Enkel bij Andere) Leg het probleem uit in detail.</li>
+            </ul>
+        </div>
+
+        <div class="reminder-section">
+            <h3 id="r2_title">2. Dropwerken</h3>
+            <ul id="r2_list">
+                <li><strong>2.1</strong> Zijn dropwerken nodig? <strong>Ja / Nee</strong></li>
+                <li><strong>2.2</strong> (Enkel bij Nee) Signalen op de dropkabel:<ul><li>2.2.1 Downstream dBmV</li><li>2.2.2 Upstream dBmV</li><li>2.2.3 SNR</li></ul></li>
+                <li><strong>2.3</strong> (Enkel bij Ja) Hoeveel meter?</li>
+                <li><strong>2.4</strong> (Enkel bij Ja) Type werk: <strong>Simple / Complex / Offerte nodig</strong></li>
+                <li><strong>2.5</strong> Waar komt de dropkabel binnen?</li>
+                <li><strong>2.5.1</strong> Foto's genomen van traject TAP → Modem?<ul><li>Bij <strong>Niet van toepassing</strong>: geef uitleg</li><li>Bij <strong>Nee</strong>: pop-up waarschuwing</li></ul></li>
+                <li><strong>2.5.2</strong> Traject aangeduid op de foto's?<ul><li>Bij <strong>Niet van toepassing</strong>: geef uitleg</li><li>Bij <strong>Nee</strong>: pop-up waarschuwing</li></ul></li>
+            </ul>
+        </div>
+
+        <div class="reminder-section">
+            <h3 id="r3_title">3. Tap</h3>
+            <ul id="r3_list">
+                <li><strong>3.1</strong> Is er een tap aanwezig? <strong>Ja / Nee</strong></li>
+                <li><strong>3.2</strong> (Enkel bij Ja) Locatie van de tap</li>
+                <li><strong>3.3</strong> (Enkel bij Ja) Type tap: <strong>Façade / Ondergronds / Paal / Interne ruimte</strong></li>
+                <li><strong>3.4</strong> (Enkel bij Ja) Signaal: <strong>OK / NOK</strong></li>
+                <li><strong>3.5</strong> (Enkel bij Ja) Effectieve signaalwaarden:<ul><li>3.5.1 Downstream dBmV</li><li>3.5.2 Upstream dBmV</li><li>3.5.3 SNR</li></ul></li>
+            </ul>
+        </div>
+
+        <div class="reminder-section">
+            <h3 id="r4_title">4. Bijkomende info</h3>
+            <ul id="r4_list">
+                <li>Alle vaststellingen die de volgende technieker nodig heeft.</li>
+                <li>Beschrijving van genomen foto's.</li>
+                <li>Bijzonderheden van de locatie of installatie.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer" id="footer_text">© Orange Belgium – Site Survey Tool</div>
+
+<script>
+// ═══════════════════════════════════════════
+// TRANSLATIONS
+// ═══════════════════════════════════════════
+const translations = {
+    nl: {
+        topBarTitle:      "🔧 Site Survey – Technician Report",
+        formTitle:        "Technician Formulier",
+        s1_title:         "1. Aansluitbaarheid",
+        s2_title:         "2. Dropwerken",
+        s3_title:         "3. Tap",
+        s4_title:         "4. Bijkomende info & vaststellingen",
+        q1_1_label:       "Is de klant aansluitbaar?",
+        q1_1_opt0:        "-- Selecteer --",
+        q1_1_opt1:        "Ja",
+        q1_1_opt2:        "Nee",
+        q1_2_label:       "Wat is het probleem?",
+        q1_2_opt0:        "-- Selecteer probleem --",
+        q1_2_opt1:        "Dropcable",
+        q1_2_opt2:        "Tap",
+        q1_2_opt3:        "Interne bekabeling",
+        q1_2_opt4:        "Andere",
+        q1_3_label:       "Leg het probleem uit in detail:",
+        q1_3_ph:          "Beschrijf het probleem in detail...",
+        badge_nee_1:      "Enkel bij Nee",
+        badge_andere_1:   "Enkel bij Andere",
+        q2_1_label:       "Zijn dropwerken nodig?",
+        q2_1_opt0:        "-- Selecteer --",
+        q2_1_opt1:        "Ja",
+        q2_1_opt2:        "Nee",
+        q2_2_label:       "Noteer de signalen op de dropkabel:",
+        q2_2_1_label:     "2.2.1 Downstream dBmV",
+        q2_2_2_label:     "2.2.2 Upstream dBmV",
+        q2_2_3_label:     "2.2.3 SNR",
+        badge_nee_2:      "Enkel bij Nee",
+        q2_3_label:       "Hoeveel meter dropkabel is nodig?",
+        q2_3_ph:          "Aantal meter (bv. 25)",
+        badge_ja_2:       "Enkel bij Ja",
+        q2_4_label:       "Type werk?",
+        q2_4_opt0:        "-- Selecteer type --",
+        q2_4_opt1:        "Simple",
+        q2_4_opt2:        "Complex",
+        q2_4_opt3:        "Offerte nodig",
+        badge_ja_2b:      "Enkel bij Ja",
+        q2_5_label:       "Waar komt de dropkabel binnen?",
+        q2_5_ph:          "Beschrijf de locatie waar de dropkabel binnenkomt...",
+        q2_5_1_label:     "Foto's genomen van traject TAP → Modem?",
+        q2_5_1_opt0:      "-- Selecteer --",
+        q2_5_1_opt1:      "Ja",
+        q2_5_1_opt2:      "Nee",
+        q2_5_1_opt3:      "Niet van toepassing",
+        q2_5_1_text_ph:   "Leg uit waarom dit niet van toepassing is...",
+        q2_5_2_label:     "Traject aangeduid op de foto's?",
+        q2_5_2_opt0:      "-- Selecteer --",
+        q2_5_2_opt1:      "Ja",
+        q2_5_2_opt2:      "Nee",
+        q2_5_2_opt3:      "Niet van toepassing",
+        q2_5_2_text_ph:   "Leg uit waarom dit niet van toepassing is...",
+        q3_1_label:       "Is er een tap aanwezig?",
+        q3_1_opt0:        "-- Selecteer --",
+        q3_1_opt1:        "Ja",
+        q3_1_opt2:        "Nee",
+        q3_2_label:       "Locatie van de tap:",
+        q3_2_ph:          "Beschrijf de locatie van de tap...",
+        badge_ja_3:       "Enkel bij Ja",
+        q3_3_label:       "Type tap?",
+        q3_3_opt0:        "-- Selecteer type --",
+        q3_3_opt1:        "Façade",
+        q3_3_opt2:        "Ondergronds",
+        q3_3_opt3:        "Paal",
+        q3_3_opt4:        "Interne ruimte",
+        badge_ja_3b:      "Enkel bij Ja",
+        q3_4_label:       "Signaal op de tap?",
+        q3_4_opt0:        "-- Selecteer --",
+        badge_ja_3c:      "Enkel bij Ja",
+        q3_5_label:       "Effectieve signaalwaarden op de tap:",
+        q3_5_1_label:     "3.5.1 Downstream dBmV",
+        q3_5_2_label:     "3.5.2 Upstream dBmV",
+        q3_5_3_label:     "3.5.3 SNR",
+        badge_ja_3d:      "Enkel bij Ja",
+        q4_1_label:       "Noteer alle info die de volgende technieker nodig zal hebben:",
+        q4_1_ph:          "• Alle vaststellingen\n• Beschrijving van genomen foto's\n• Bijzonderheden van de locatie",
+        btn_copy:         "📋 Kopieer naar klembord",
+        btn_clear:        "🗑️ Formulier wissen",
+        copyMsg:          "✅ Rapport gekopieerd naar klembord!",
+        clearConfirm:     "Bent u zeker dat u het formulier wilt wissen?",
+        reminder_title:   "📋 Richtlijnen – Wat invullen?",
+        r1_title:         "1. Aansluitbaarheid",
+        r1_list:          `<li><strong>1.1</strong> Is de klant aansluitbaar? <strong>Ja / Nee</strong></li>
+                           <li><strong>1.2</strong> (Enkel bij Nee) Wat is het probleem?<br>→ <strong>Dropcable / Tap / Interne bekabeling / Andere</strong></li>
+                           <li><strong>1.3</strong> (Enkel bij Andere) Leg het probleem uit in detail.</li>`,
+        r2_title:         "2. Dropwerken",
+        r2_list:          `<li><strong>2.1</strong> Zijn dropwerken nodig? <strong>Ja / Nee</strong></li>
+                           <li><strong>2.2</strong> (Enkel bij Nee) Signalen op de dropkabel:<ul><li>2.2.1 Downstream dBmV</li><li>2.2.2 Upstream dBmV</li><li>2.2.3 SNR</li></ul></li>
+                           <li><strong>2.3</strong> (Enkel bij Ja) Hoeveel meter?</li>
+                           <li><strong>2.4</strong> (Enkel bij Ja) Type werk: <strong>Simple / Complex / Offerte nodig</strong></li>
+                           <li><strong>2.5</strong> Waar komt de dropkabel binnen?</li>
+                           <li><strong>2.5.1</strong> Foto's genomen van traject TAP → Modem?<ul><li>Bij <strong>Niet van toepassing</strong>: geef uitleg</li><li>Bij <strong>Nee</strong>: pop-up waarschuwing</li></ul></li>
+                           <li><strong>2.5.2</strong> Traject aangeduid op de foto's?<ul><li>Bij <strong>Niet van toepassing</strong>: geef uitleg</li><li>Bij <strong>Nee</strong>: pop-up waarschuwing</li></ul></li>`,
+        r3_title:         "3. Tap",
+        r3_list:          `<li><strong>3.1</strong> Is er een tap aanwezig? <strong>Ja / Nee</strong></li>
+                           <li><strong>3.2</strong> (Enkel bij Ja) Locatie van de tap</li>
+                           <li><strong>3.3</strong> (Enkel bij Ja) Type tap: <strong>Façade / Ondergronds / Paal / Interne ruimte</strong></li>
+                           <li><strong>3.4</strong> (Enkel bij Ja) Signaal: <strong>OK / NOK</strong></li>
+                           <li><strong>3.5</strong> (Enkel bij Ja) Effectieve signaalwaarden:<ul><li>3.5.1 Downstream dBmV</li><li>3.5.2 Upstream dBmV</li><li>3.5.3 SNR</li></ul></li>`,
+        r4_title:         "4. Bijkomende info",
+        r4_list:          `<li>Alle vaststellingen die de volgende technieker nodig heeft.</li>
+                           <li>Beschrijving van genomen foto's.</li>
+                           <li>Bijzonderheden van de locatie of installatie.</li>`,
+        footer:           "© Orange Belgium – Site Survey Tool",
+        popup_fotos:      "<strong>Opgelet!</strong><br><br>Het is heel belangrijk dat er foto's genomen worden van het traject van de dropkabel en deze in de interventie rapport worden geplaatst.",
+        popup_traject:    "<strong>Opgelet!</strong><br><br>Het is heel belangrijk dat het traject van de te plaatsen dropkabel goed aangeduid is en deze foto's in de interventie rapport worden geplaatst.",
+        popup_btn:        "Begrepen",
+        report_header:    "===== SITE SURVEY – TECHNICIAN REPORT =====",
+        report_s1:        "1. AANSLUITBAARHEID",
+        report_s2:        "2. DROPWERKEN",
+        report_s3:        "3. TAP",
+        report_s4:        "4. BIJKOMENDE INFO & VASTSTELLINGEN",
+        report_footer:    "===========================================",
+        report_none:      "(geen info ingevuld)",
+        report_meter:     "meter"
+    },
+    fr: {
+        topBarTitle:      "🔧 Site Survey – Rapport Technicien",
+        formTitle:        "Formulaire Technicien",
+        s1_title:         "1. Raccordabilité",
+        s2_title:         "2. Travaux de drop",
+        s3_title:         "3. Tap",
+        s4_title:         "4. Informations complémentaires",
+        q1_1_label:       "Le client est-il raccordable?",
+        q1_1_opt0:        "-- Sélectionner --",
+        q1_1_opt1:        "Oui",
+        q1_1_opt2:        "Non",
+        q1_2_label:       "Quel est le problème?",
+        q1_2_opt0:        "-- Sélectionner le problème --",
+        q1_2_opt1:        "Câble drop",
+        q1_2_opt2:        "Tap",
+        q1_2_opt3:        "Câblage interne",
+        q1_2_opt4:        "Autre",
+        q1_3_label:       "Expliquez le problème en détail:",
+        q1_3_ph:          "Décrivez le problème en détail...",
+        badge_nee_1:      "Seulement si Non",
+        badge_andere_1:   "Seulement si Autre",
+        q2_1_label:       "Des travaux de drop sont-ils nécessaires?",
+        q2_1_opt0:        "-- Sélectionner --",
+        q2_1_opt1:        "Oui",
+        q2_1_opt2:        "Non",
+        q2_2_label:       "Notez les signaux sur le câble drop:",
+        q2_2_1_label:     "2.2.1 Downstream dBmV",
+        q2_2_2_label:     "2.2.2 Upstream dBmV",
+        q2_2_3_label:     "2.2.3 SNR",
+        badge_nee_2:      "Seulement si Non",
+        q2_3_label:       "Combien de mètres de câble drop sont nécessaires?",
+        q2_3_ph:          "Nombre de mètres (ex. 25)",
+        badge_ja_2:       "Seulement si Oui",
+        q2_4_label:       "Type de travaux?",
+        q2_4_opt0:        "-- Sélectionner le type --",
+        q2_4_opt1:        "Simple",
+        q2_4_opt2:        "Complexe",
+        q2_4_opt3:        "Devis nécessaire",
+        badge_ja_2b:      "Seulement si Oui",
+        q2_5_label:       "Où entre le câble drop?",
+        q2_5_ph:          "Décrivez l'emplacement d'entrée du câble drop...",
+        q2_5_1_label:     "Photos prises du trajet TAP → Modem?",
+        q2_5_1_opt0:      "-- Sélectionner --",
+        q2_5_1_opt1:      "Oui",
+        q2_5_1_opt2:      "Non",
+        q2_5_1_opt3:      "Non applicable",
+        q2_5_1_text_ph:   "Expliquez pourquoi ce n'est pas applicable...",
+        q2_5_2_label:     "Trajet indiqué sur les photos?",
+        q2_5_2_opt0:      "-- Sélectionner --",
+        q2_5_2_opt1:      "Oui",
+        q2_5_2_opt2:      "Non",
+        q2_5_2_opt3:      "Non applicable",
+        q2_5_2_text_ph:   "Expliquez pourquoi ce n'est pas applicable...",
+        q3_1_label:       "Y a-t-il un tap présent?",
+        q3_1_opt0:        "-- Sélectionner --",
+        q3_1_opt1:        "Oui",
+        q3_1_opt2:        "Non",
+        q3_2_label:       "Localisation du tap:",
+        q3_2_ph:          "Décrivez la localisation du tap...",
+        badge_ja_3:       "Seulement si Oui",
+        q3_3_label:       "Type de tap?",
+        q3_3_opt0:        "-- Sélectionner le type --",
+        q3_3_opt1:        "Façade",
+        q3_3_opt2:        "Souterrain",
+        q3_3_opt3:        "Poteau",
+        q3_3_opt4:        "Local interne",
+        badge_ja_3b:      "Seulement si Oui",
+        q3_4_label:       "Signal sur le tap?",
+        q3_4_opt0:        "-- Sélectionner --",
+        badge_ja_3c:      "Seulement si Oui",
+        q3_5_label:       "Valeurs de signal effectives sur le tap:",
+        q3_5_1_label:     "3.5.1 Downstream dBmV",
+        q3_5_2_label:     "3.5.2 Upstream dBmV",
+        q3_5_3_label:     "3.5.3 SNR",
+        badge_ja_3d:      "Seulement si Oui",
+        q4_1_label:       "Notez toutes les informations dont le prochain technicien aura besoin:",
+        q4_1_ph:          "• Toutes les constatations\n• Description des photos prises\n• Particularités du lieu",
+        btn_copy:         "📋 Copier dans le presse-papiers",
+        btn_clear:        "🗑️ Effacer le formulaire",
+        copyMsg:          "✅ Rapport copié dans le presse-papiers!",
+        clearConfirm:     "Êtes-vous sûr de vouloir effacer le formulaire?",
+        reminder_title:   "📋 Instructions – Que remplir?",
+        r1_title:         "1. Raccordabilité",
+        r1_list:          `<li><strong>1.1</strong> Le client est-il raccordable? <strong>Oui / Non</strong></li>
+                           <li><strong>1.2</strong> (Seulement si Non) Quel est le problème?<br>→ <strong>Câble drop / Tap / Câblage interne / Autre</strong></li>
+                           <li><strong>1.3</strong> (Seulement si Autre) Expliquez le problème en détail.</li>`,
+        r2_title:         "2. Travaux de drop",
+        r2_list:          `<li><strong>2.1</strong> Travaux de drop nécessaires? <strong>Oui / Non</strong></li>
+                           <li><strong>2.2</strong> (Seulement si Non) Signaux sur le câble drop:<ul><li>2.2.1 Downstream dBmV</li><li>2.2.2 Upstream dBmV</li><li>2.2.3 SNR</li></ul></li>
+                           <li><strong>2.3</strong> (Seulement si Oui) Combien de mètres?</li>
+                           <li><strong>2.4</strong> (Seulement si Oui) Type de travaux: <strong>Simple / Complexe / Devis nécessaire</strong></li>
+                           <li><strong>2.5</strong> Où entre le câble drop?</li>
+                           <li><strong>2.5.1</strong> Photos prises du trajet TAP → Modem?<ul><li>Si <strong>Non applicable</strong>: expliquez</li><li>Si <strong>Non</strong>: avertissement pop-up</li></ul></li>
+                           <li><strong>2.5.2</strong> Trajet indiqué sur les photos?<ul><li>Si <strong>Non applicable</strong>: expliquez</li><li>Si <strong>Non</strong>: avertissement pop-up</li></ul></li>`,
+        r3_title:         "3. Tap",
+        r3_list:          `<li><strong>3.1</strong> Y a-t-il un tap présent? <strong>Oui / Non</strong></li>
+                           <li><strong>3.2</strong> (Seulement si Oui) Localisation du tap</li>
+                           <li><strong>3.3</strong> (Seulement si Oui) Type de tap: <strong>Façade / Souterrain / Poteau / Local interne</strong></li>
+                           <li><strong>3.4</strong> (Seulement si Oui) Signal: <strong>OK / NOK</strong></li>
+                           <li><strong>3.5</strong> (Seulement si Oui) Valeurs de signal:<ul><li>3.5.1 Downstream dBmV</li><li>3.5.2 Upstream dBmV</li><li>3.5.3 SNR</li></ul></li>`,
+        r4_title:         "4. Informations complémentaires",
+        r4_list:          `<li>Toutes les constatations dont le prochain technicien a besoin.</li>
+                           <li>Description des photos prises.</li>
+                           <li>Particularités du lieu ou de l'installation.</li>`,
+        footer:           "© Orange Belgium – Outil Site Survey",
+        popup_fotos:      "<strong>Attention!</strong><br><br>Il est très important de prendre des photos du trajet du câble drop et de les inclure dans le rapport d'intervention.",
+        popup_traject:    "<strong>Attention!</strong><br><br>Il est très important que le trajet du câble drop à placer soit bien indiqué et que ces photos soient incluses dans le rapport d'intervention.",
+        popup_btn:        "Compris",
+        report_header:    "===== SITE SURVEY – RAPPORT TECHNICIEN =====",
+        report_s1:        "1. RACCORDABILITÉ",
+        report_s2:        "2. TRAVAUX DE DROP",
+        report_s3:        "3. TAP",
+        report_s4:        "4. INFORMATIONS COMPLÉMENTAIRES",
+        report_footer:    "============================================",
+        report_none:      "(aucune info remplie)",
+        report_meter:     "mètres"
+    },
+    en: {
+        topBarTitle:      "🔧 Site Survey – Technician Report",
+        formTitle:        "Technician Form",
+        s1_title:         "1. Connectivity",
+        s2_title:         "2. Drop Works",
+        s3_title:         "3. Tap",
+        s4_title:         "4. Additional Info & Findings",
+        q1_1_label:       "Is the customer connectable?",
+        q1_1_opt0:        "-- Select --",
+        q1_1_opt1:        "Yes",
+        q1_1_opt2:        "No",
+        q1_2_label:       "What is the problem?",
+        q1_2_opt0:        "-- Select problem --",
+        q1_2_opt1:        "Drop cable",
+        q1_2_opt2:        "Tap",
+        q1_2_opt3:        "Internal cabling",
+        q1_2_opt4:        "Other",
+        q1_3_label:       "Explain the problem in detail:",
+        q1_3_ph:          "Describe the problem in detail...",
+        badge_nee_1:      "Only if No",
+        badge_andere_1:   "Only if Other",
+        q2_1_label:       "Are drop works needed?",
+        q2_1_opt0:        "-- Select --",
+        q2_1_opt1:        "Yes",
+        q2_1_opt2:        "No",
+        q2_2_label:       "Note the signals on the drop cable:",
+        q2_2_1_label:     "2.2.1 Downstream dBmV",
+        q2_2_2_label:     "2.2.2 Upstream dBmV",
+        q2_2_3_label:     "2.2.3 SNR",
+        badge_nee_2:      "Only if No",
+        q2_3_label:       "How many meters of drop cable are needed?",
+        q2_3_ph:          "Number of meters (e.g. 25)",
+        badge_ja_2:       "Only if Yes",
+        q2_4_label:       "Type of work?",
+        q2_4_opt0:        "-- Select type --",
+        q2_4_opt1:        "Simple",
+        q2_4_opt2:        "Complex",
+        q2_4_opt3:        "Quote needed",
+        badge_ja_2b:      "Only if Yes",
+        q2_5_label:       "Where does the drop cable enter?",
+        q2_5_ph:          "Describe the location where the drop cable enters...",
+        q2_5_1_label:     "Photos taken of route TAP → Modem?",
+        q2_5_1_opt0:      "-- Select --",
+        q2_5_1_opt1:      "Yes",
+        q2_5_1_opt2:      "No",
+        q2_5_1_opt3:      "Not applicable",
+        q2_5_1_text_ph:   "Explain why this is not applicable...",
+        q2_5_2_label:     "Route indicated on the photos?",
+        q2_5_2_opt0:      "-- Select --",
+        q2_5_2_opt1:      "Yes",
+        q2_5_2_opt2:      "No",
+        q2_5_2_opt3:      "Not applicable",
+        q2_5_2_text_ph:   "Explain why this is not applicable...",
+        q3_1_label:       "Is a tap present?",
+        q3_1_opt0:        "-- Select --",
+        q3_1_opt1:        "Yes",
+        q3_1_opt2:        "No",
+        q3_2_label:       "Location of the tap:",
+        q3_2_ph:          "Describe the location of the tap...",
+        badge_ja_3:       "Only if Yes",
+        q3_3_label:       "Type of tap?",
+        q3_3_opt0:        "-- Select type --",
+        q3_3_opt1:        "Façade",
+        q3_3_opt2:        "Underground",
+        q3_3_opt3:        "Pole",
+        q3_3_opt4:        "Internal room",
+        badge_ja_3b:      "Only if Yes",
+        q3_4_label:       "Signal on the tap?",
+        q3_4_opt0:        "-- Select --",
+        badge_ja_3c:      "Only if Yes",
+        q3_5_label:       "Effective signal values on the tap:",
+        q3_5_1_label:     "3.5.1 Downstream dBmV",
+        q3_5_2_label:     "3.5.2 Upstream dBmV",
+        q3_5_3_label:     "3.5.3 SNR",
+        badge_ja_3d:      "Only if Yes",
+        q4_1_label:       "Note all information the next technician will need:",
+        q4_1_ph:          "• All findings\n• Description of photos taken\n• Specific details about the location",
+        btn_copy:         "📋 Copy to Clipboard",
+        btn_clear:        "🗑️ Clear Form",
+        copyMsg:          "✅ Report copied to clipboard!",
+        clearConfirm:     "Are you sure you want to clear the form?",
+        reminder_title:   "📋 Guidelines – What to fill in?",
+        r1_title:         "1. Connectivity",
+        r1_list:          `<li><strong>1.1</strong> Is the customer connectable? <strong>Yes / No</strong></li>
+                           <li><strong>1.2</strong> (Only if No) What is the problem?<br>→ <strong>Drop cable / Tap / Internal cabling / Other</strong></li>
+                           <li><strong>1.3</strong> (Only if Other) Explain the problem in detail.</li>`,
+        r2_title:         "2. Drop Works",
+        r2_list:          `<li><strong>2.1</strong> Drop works needed? <strong>Yes / No</strong></li>
+                           <li><strong>2.2</strong> (Only if No) Signals on the drop cable:<ul><li>2.2.1 Downstream dBmV</li><li>2.2.2 Upstream dBmV</li><li>2.2.3 SNR</li></ul></li>
+                           <li><strong>2.3</strong> (Only if Yes) How many meters?</li>
+                           <li><strong>2.4</strong> (Only if Yes) Type of work: <strong>Simple / Complex / Quote needed</strong></li>
+                           <li><strong>2.5</strong> Where does the drop cable enter?</li>
+                           <li><strong>2.5.1</strong> Photos taken of route TAP → Modem?<ul><li>If <strong>Not applicable</strong>: explain</li><li>If <strong>No</strong>: pop-up warning</li></ul></li>
+                           <li><strong>2.5.2</strong> Route indicated on the photos?<ul><li>If <strong>Not applicable</strong>: explain</li><li>If <strong>No</strong>: pop-up warning</li></ul></li>`,
+        r3_title:         "3. Tap",
+        r3_list:          `<li><strong>3.1</strong> Is a tap present? <strong>Yes / No</strong></li>
+                           <li><strong>3.2</strong> (Only if Yes) Location of the tap</li>
+                           <li><strong>3.3</strong> (Only if Yes) Type of tap: <strong>Façade / Underground / Pole / Internal room</strong></li>
+                           <li><strong>3.4</strong> (Only if Yes) Signal: <strong>OK / NOK</strong></li>
+                           <li><strong>3.5</strong> (Only if Yes) Effective signal values:<ul><li>3.5.1 Downstream dBmV</li><li>3.5.2 Upstream dBmV</li><li>3.5.3 SNR</li></ul></li>`,
+        r4_title:         "4. Additional Info",
+        r4_list:          `<li>All findings the next technician needs.</li>
+                           <li>Description of photos taken.</li>
+                           <li>Specific details about the location or installation.</li>`,
+        footer:           "© Orange Belgium – Site Survey Tool",
+        popup_fotos:      "<strong>Warning!</strong><br><br>It is very important that photos are taken of the drop cable route and included in the intervention report.",
+        popup_traject:    "<strong>Warning!</strong><br><br>It is very important that the route of the drop cable to be installed is clearly indicated and that these photos are included in the intervention report.",
+        popup_btn:        "Understood",
+        report_header:    "===== SITE SURVEY – TECHNICIAN REPORT =====",
+        report_s1:        "1. CONNECTIVITY",
+        report_s2:        "2. DROP WORKS",
+        report_s3:        "3. TAP",
+        report_s4:        "4. ADDITIONAL INFO & FINDINGS",
+        report_footer:    "===========================================",
+        report_none:      "(no info filled in)",
+        report_meter:     "meters"
+    }
+};
+
+// ═══════════════════════════════════════════
+// CURRENT LANGUAGE
+// ═══════════════════════════════════════════
+let currentLang = "nl";
+
+// ═══════════════════════════════════════════
+// SELECT LANGUAGE
+// ═══════════════════════════════════════════
+function selectLanguage(lang) {
+    currentLang = lang;
+
+    // Save current form values
+    const saved = saveFormValues();
+
+    // Apply translations
+    applyTranslations(lang);
+
+    // Restore form values
+    restoreFormValues(saved);
+
+    // Update active button
+    ["nl","fr","en"].forEach(l => {
+        document.getElementById("btn_" + l).classList.toggle("active", l === lang);
+    });
+
+    // Close language popup if open
+    document.getElementById("langPopup").style.display = "none";
+
+    // Re-trigger conditional logic to keep visible rows correct
+    handle_1_1();
+    handle_1_2();
+    handle_2_1();
+    handle_3_1();
+}
+
+// ═══════════════════════════════════════════
+// SAVE & RESTORE FORM VALUES
+// ═══════════════════════════════════════════
+function saveFormValues() {
+    const ids = [
+        "q1_1","q1_2","q1_3",
+        "q2_1","q2_2_1","q2_2_2","q2_2_3",
+        "q2_3","q2_4","q2_5","q2_5_1","q2_5_1_text","q2_5_2","q2_5_2_text",
+        "q3_1","q3_2","q3_3","q3_4","q3_5_1","q3_5_2","q3_5_3",
+        "q4_1"
+    ];
+    const saved = {};
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) saved[id] = el.value;
+    });
+    return saved;
+}
+
+function restoreFormValues(saved) {
+    Object.keys(saved).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = saved[id];
+    });
+}
+
+// ═══════════════════════════════════════════
+// APPLY TRANSLATIONS
+// ═══════════════════════════════════════════
+function applyTranslations(lang) {
+    const t = translations[lang];
+
+    const textIds = [
+        "topBarTitle","formTitle",
+        "s1_title","s2_title","s3_title","s4_title",
+        "q1_1_label","q1_2_label","q1_3_label",
+        "badge_nee_1","badge_andere_1",
+        "q2_1_label","q2_2_label",
+        "q2_2_1_label","q2_2_2_label","q2_2_3_label",
+        "badge_nee_2","q2_3_label","badge_ja_2",
+        "q2_4_label","badge_ja_2b","q2_5_label",
+        "q2_5_1_label","q2_5_2_label",
+        "q3_1_label","q3_2_label","badge_ja_3",
+        "q3_3_label","badge_ja_3b","q3_4_label","badge_ja_3c",
+        "q3_5_label","q3_5_1_label","q3_5_2_label","q3_5_3_label","badge_ja_3d",
+        "q4_1_label",
+        "reminder_title","r1_title","r2_title","r3_title","r4_title",
+        "footer_text"
+    ];
+
+    textIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && t[id]) el.textContent = t[id];
+    });
+
+    // innerHTML for reminder lists
+    ["r1_list","r2_list","r3_list","r4_list"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && t[id]) el.innerHTML = t[id];
+    });
+
+    // Option texts
+    const optionIds = [
+        "q1_1_opt0","q1_1_opt1","q1_1_opt2",
+        "q1_2_opt0","q1_2_opt1","q1_2_opt2","q1_2_opt3","q1_2_opt4",
+        "q2_1_opt0","q2_1_opt1","q2_1_opt2",
+        "q2_4_opt0","q2_4_opt1","q2_4_opt2","q2_4_opt3",
+        "q2_5_1_opt0","q2_5_1_opt1","q2_5_1_opt2","q2_5_1_opt3",
+        "q2_5_2_opt0","q2_5_2_opt1","q2_5_2_opt2","q2_5_2_opt3",
+        "q3_1_opt0","q3_1_opt1","q3_1_opt2",
+        "q3_3_opt0","q3_3_opt1","q3_3_opt2","q3_3_opt3","q3_3_opt4",
+        "q3_4_opt0"
+    ];
+
+    optionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && t[id]) el.textContent = t[id];
+    });
+
+    // Placeholders
+    const phMap = {
+        "q1_3":         "q1_3_ph",
+        "q2_3":         "q2_3_ph",
+        "q2_5":         "q2_5_ph",
+        "q2_5_1_text":  "q2_5_1_text_ph",
+        "q2_5_2_text":  "q2_5_2_text_ph",
+        "q3_2":         "q3_2_ph",
+        "q4_1":         "q4_1_ph"
+    };
+
+    Object.keys(phMap).forEach(fieldId => {
+        const el = document.getElementById(fieldId);
+        const key = phMap[fieldId];
+        if (el && t[key]) el.placeholder = t[key];
+    });
+
+    // Buttons
+    document.getElementById("btn_copy").textContent  = t.btn_copy;
+    document.getElementById("btn_clear").textContent = t.btn_clear;
+
+    // Popup texts
+    document.getElementById("popup_fotos_text").innerHTML   = t.popup_fotos;
+    document.getElementById("popup_traject_text").innerHTML = t.popup_traject;
+    document.getElementById("popup_fotos_btn").textContent  = t.popup_btn;
+    document.getElementById("popup_traject_btn").textContent = t.popup_btn;
+}
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+function showIf(id, condition) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = condition ? "block" : "none";
+}
+
+function showFreeText(id, condition) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = condition ? "block" : "none";
+}
+
+function openPopup(id) {
+    document.getElementById(id).classList.add("active");
+}
+
+function closePopup(id) {
+    document.getElementById(id).classList.remove("active");
+}
+
+function g(id) {
+    return document.getElementById(id)?.value.trim() || "";
+}
+
+// ═══════════════════════════════════════════
+// CONDITIONAL LOGIC
+// ═══════════════════════════════════════════
+function handle_1_1() {
+    const val = g("q1_1");
+    const t = translations[currentLang];
+    const isNo = (val === "Nee" || val === "Non" || val === "No");
+    showIf("row_1_2", isNo);
+    if (!isNo) {
+        document.getElementById("q1_2").value = "";
+        showIf("row_1_3", false);
+    }
+}
+
+function handle_1_2() {
+    const val = g("q1_2");
+    const isOther = (val === "Andere" || val === "Autre" || val === "Other");
+    showIf("row_1_3", isOther);
+}
+
+function handle_2_1() {
+    const val = g("q2_1");
+    const isYes = (val === "Ja" || val === "Oui" || val === "Yes");
+    const isNo  = (val === "Nee" || val === "Non" || val === "No");
+    const answered = val !== "";
+    showIf("row_2_2",   isNo);
+    showIf("row_2_3",   isYes);
+    showIf("row_2_4",   isYes);
+    showIf("row_2_5",   answered);
+    showIf("row_2_5_1", answered);
+    showIf("row_2_5_2", answered);
+}
+
+function handle_2_5_1() {
+    const val = g("q2_5_1");
+    const isNo  = (val === "Nee" || val === "Non" || val === "No");
+    const isNVT = (val === "NVT");
+    if (isNo) openPopup("popup_fotos");
+    showFreeText("free_2_5_1", isNVT);
+}
+
+function handle_2_5_2() {
+    const val = g("q2_5_2");
+    const isNo  = (val === "Nee" || val === "Non" || val === "No");
+    const isNVT = (val === "NVT");
+    if (isNo) openPopup("popup_traject");
+    showFreeText("free_2_5_2", isNVT);
+}
+
+function handle_3_1() {
+    const val = g("q3_1");
+    const isYes = (val === "Ja" || val === "Oui" || val === "Yes");
+    showIf("row_3_2", isYes);
+    showIf("row_3_3", isYes);
+    showIf("row_3_4", isYes);
+    showIf("row_3_5", isYes);
+}
+
+// ═══════════════════════════════════════════
+// COPY TO CLIPBOARD
+// ═══════════════════════════════════════════
+function copyToClipboard() {
+    const t = translations[currentLang];
+    const tl = translations[currentLang];
+    let report = t.report_header + "\n\n";
+
+    // ── SECTION 1 ──────────────────────────────
+    report += t.report_s1 + "\n";
+
+    // 1.1
+    report += `  1.1 – ${tl.q1_1_label}\n`;
+    report += `       ${g("q1_1") || t.report_none}\n\n`;
+
+    const isNo1 = (g("q1_1") === "Nee" || g("q1_1") === "Non" || g("q1_1") === "No");
+    if (isNo1) {
+        // 1.2
+        report += `  1.2 – ${tl.q1_2_label}\n`;
+        report += `       ${g("q1_2") || t.report_none}\n\n`;
+
+        const isOther = (g("q1_2") === "Andere" || g("q1_2") === "Autre" || g("q1_2") === "Other");
+        if (isOther) {
+            // 1.3
+            report += `  1.3 – ${tl.q1_3_label}\n`;
+            report += `       ${g("q1_3") || t.report_none}\n\n`;
+        }
+    }
+
+    // ── SECTION 2 ──────────────────────────────
+    report += t.report_s2 + "\n";
+
+    // 2.1
+    report += `  2.1 – ${tl.q2_1_label}\n`;
+    report += `       ${g("q2_1") || t.report_none}\n\n`;
+
+    const isNo2  = (g("q2_1") === "Nee" || g("q2_1") === "Non" || g("q2_1") === "No");
+    const isYes2 = (g("q2_1") === "Ja"  || g("q2_1") === "Oui" || g("q2_1") === "Yes");
+
+    if (isNo2) {
+        // 2.2 signals
+        report += `  2.2 – ${tl.q2_2_label}\n`;
+        report += `       2.2.1 ${tl.q2_2_1_label}: ${g("q2_2_1") || t.report_none}\n`;
+        report += `       2.2.2 ${tl.q2_2_2_label}: ${g("q2_2_2") || t.report_none}\n`;
+        report += `       2.2.3 ${tl.q2_2_3_label}: ${g("q2_2_3") || t.report_none}\n\n`;
+    }
+
+    if (isYes2) {
+        // 2.3
+        report += `  2.3 – ${tl.q2_3_label}\n`;
+        report += `       ${g("q2_3") || t.report_none} ${t.report_meter}\n\n`;
+
+        // 2.4
+        report += `  2.4 – ${tl.q2_4_label}\n`;
+        report += `       ${g("q2_4") || t.report_none}\n\n`;
+    }
+
+    if (g("q2_1") !== "") {
+        // 2.5
+        report += `  2.5 – ${tl.q2_5_label}\n`;
+        report += `       ${g("q2_5") || t.report_none}\n\n`;
+
+        // 2.5.1
+        report += `  2.5.1 – ${tl.q2_5_1_label}\n`;
+        const val_251 = g("q2_5_1");
+        if (val_251 === "NVT") {
+            report += `       ${tl.q2_5_1_opt3} – ${g("q2_5_1_text") || t.report_none}\n\n`;
+        } else {
+            report += `       ${val_251 || t.report_none}\n\n`;
+        }
+
+        // 2.5.2
+        report += `  2.5.2 – ${tl.q2_5_2_label}\n`;
+        const val_252 = g("q2_5_2");
+        if (val_252 === "NVT") {
+            report += `       ${tl.q2_5_2_opt3} – ${g("q2_5_2_text") || t.report_none}\n\n`;
+        } else {
+            report += `       ${val_252 || t.report_none}\n\n`;
+        }
+    }
+
+    // ── SECTION 3 ──────────────────────────────
+    report += t.report_s3 + "\n";
+
+    // 3.1
+    report += `  3.1 – ${tl.q3_1_label}\n`;
+    report += `       ${g("q3_1") || t.report_none}\n\n`;
+
+    const isYes3 = (g("q3_1") === "Ja" || g("q3_1") === "Oui" || g("q3_1") === "Yes");
+    if (isYes3) {
+        // 3.2
+        report += `  3.2 – ${tl.q3_2_label}\n`;
+        report += `       ${g("q3_2") || t.report_none}\n\n`;
+
+        // 3.3
+        report += `  3.3 – ${tl.q3_3_label}\n`;
+        report += `       ${g("q3_3") || t.report_none}\n\n`;
+
+        // 3.4
+        report += `  3.4 – ${tl.q3_4_label}\n`;
+        report += `       ${g("q3_4") || t.report_none}\n\n`;
+
+        // 3.5
+        report += `  3.5 – ${tl.q3_5_label}\n`;
+        report += `       3.5.1 ${tl.q3_5_1_label}: ${g("q3_5_1") || t.report_none}\n`;
+        report += `       3.5.2 ${tl.q3_5_2_label}: ${g("q3_5_2") || t.report_none}\n`;
+        report += `       3.5.3 ${tl.q3_5_3_label}: ${g("q3_5_3") || t.report_none}\n\n`;
+    }
+
+    // ── SECTION 4 ──────────────────────────────
+    report += t.report_s4 + "\n";
+    report += `  ${tl.q4_1_label}\n`;
+    report += `  ${g("q4_1") || t.report_none}\n\n`;
+
+    report += t.report_footer;
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(report).then(showCopyMessage).catch(() => fallbackCopy(report));
+    } else {
+        fallbackCopy(report);
+    }
+}
+
+
+function fallbackCopy(text) {
+    const t = document.createElement("textarea");
+    t.value = text;
+    t.style.position = "fixed";
+    t.style.opacity = "0";
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand("copy");
+    document.body.removeChild(t);
+    showCopyMessage();
+}
+
+function showCopyMessage() {
+    const msg = document.getElementById("copyMessage");
+    msg.textContent = translations[currentLang].copyMsg;
+    msg.style.display = "block";
+    setTimeout(() => msg.style.display = "none", 3000);
+}
+
+function clearForm() {
+    if (confirm(translations[currentLang].clearConfirm)) {
+        document.getElementById("myForm").reset();
+        const rows = [
+            "row_1_2","row_1_3",
+            "row_2_2","row_2_3","row_2_4",
+            "row_2_5","row_2_5_1","row_2_5_2",
+            "row_3_2","row_3_3","row_3_4","row_3_5"
+        ];
+        rows.forEach(id => showIf(id, false));
+        showFreeText("free_2_5_1", false);
+        showFreeText("free_2_5_2", false);
+    }
+}
+
+// ═══════════════════════════════════════════
+// INIT — apply default language on load
+// ═══════════════════════════════════════════
+window.onload = function() {
+    applyTranslations("nl");
+    document.getElementById("btn_nl").classList.add("active");
+};
+</script>
+
+</body>
+</html>
